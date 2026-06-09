@@ -101,12 +101,75 @@ const collaborationItems = [
 ];
 
 const menuItems = [
-  { title: 'Careers', path: '#menu-careers' },
-  { title: 'Support', path: '#menu-support' },
-  { title: 'Resources', path: '#menu-resources' },
-  { title: 'Blog & Insights', path: '#menu-blog' },
-  { title: 'Whitepapers', path: '#menu-whitepapers' },
-  { title: 'Webinars', path: '#menu-webinars' }
+  {
+    title: 'Careers',
+    desc: 'Join our team of technology builders.',
+    path: '#menu-careers',
+    icon: (
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+        <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/>
+        <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
+      </svg>
+    ),
+    color: '#8B5CF6'
+  },
+  {
+    title: 'Support',
+    desc: 'Get 24/7 technical assistance.',
+    path: '#menu-support',
+    icon: (
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+      </svg>
+    ),
+    color: '#3B82F6'
+  },
+  {
+    title: 'Resources',
+    desc: 'Access guides, tools, and documentation.',
+    path: '#menu-resources',
+    icon: (
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+        <polyline points="14 2 14 8 20 8"/>
+      </svg>
+    ),
+    color: '#10B981'
+  },
+  {
+    title: 'Blog & Insights',
+    desc: 'Stay updated with technology trends.',
+    path: '#menu-blog',
+    icon: (
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M12 20h9M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/>
+      </svg>
+    ),
+    color: '#F59E0B'
+  },
+  {
+    title: 'Whitepapers',
+    desc: 'In-depth research and technical briefs.',
+    path: '#menu-whitepapers',
+    icon: (
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2zM22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+      </svg>
+    ),
+    color: '#EF4444'
+  },
+  {
+    title: 'Webinars',
+    desc: 'Watch technical panels and event recordings.',
+    path: '#menu-webinars',
+    icon: (
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+        <polygon points="23 7 16 12 23 17 23 7"/>
+        <rect x="1" y="5" width="15" height="14" rx="2" ry="2"/>
+      </svg>
+    ),
+    color: '#EC4899'
+  }
 ];
 
 const navigationData = [
@@ -328,82 +391,86 @@ export default function Header() {
                       {/* Mega Menu Dropdown */}
                       {isMega && (
                         <div className="mega-menu-panel" role="menu" aria-label={`${item.label} mega menu`}>
-                          <div className="mega-menu-grid">
+                          <div className={`mega-menu-grid ${item.id === 'portfolio' ? 'portfolio-grid' : 'collaboration-grid'}`}>
                             {/* Left Column: Portfolio */}
-                            <div className="mega-menu-column">
-                              <div className="mega-column-header">
-                                <svg className="mega-header-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2.5">
-                                  <polygon points="12 2 2 7 12 12 22 7 12 2"/>
-                                  <polyline points="2 17 12 22 22 17"/>
-                                </svg>
-                                <h3>PORTFOLIO</h3>
+                            {item.id === 'portfolio' && (
+                              <div className="mega-menu-column">
+                                <div className="mega-column-header">
+                                  <svg className="mega-header-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2.5">
+                                    <polygon points="12 2 2 7 12 12 22 7 12 2"/>
+                                    <polyline points="2 17 12 22 22 17"/>
+                                  </svg>
+                                  <h3>PORTFOLIO</h3>
+                                </div>
+                                <div className="mega-links-list">
+                                  {portfolioItems.map((sub, index) => (
+                                    <a
+                                      key={sub.title}
+                                      href={sub.path}
+                                      ref={(el) => (dropdownRefs.current[`portfolio-${index}`] = el)}
+                                      className="mega-item-link"
+                                      role="menuitem"
+                                      onKeyDown={(e) => handleDropdownItemKeyDown(e, 'portfolio', index, portfolioItems.length)}
+                                      onClick={() => {
+                                        setActiveTab('portfolio');
+                                        setActiveDropdown(null);
+                                      }}
+                                    >
+                                      <div className="mega-item-icon-wrapper red-theme">
+                                        {sub.icon}
+                                      </div>
+                                      <div className="mega-item-text">
+                                        <span className="mega-item-title">
+                                          {sub.title} <span className="arrow-hover">→</span>
+                                        </span>
+                                        <span className="mega-item-desc">{sub.desc}</span>
+                                      </div>
+                                    </a>
+                                  ))}
+                                </div>
                               </div>
-                              <div className="mega-links-list">
-                                {portfolioItems.map((sub, index) => (
-                                  <a
-                                    key={sub.title}
-                                    href={sub.path}
-                                    ref={(el) => (dropdownRefs.current[`portfolio-${index}`] = el)}
-                                    className="mega-item-link"
-                                    role="menuitem"
-                                    onKeyDown={(e) => handleDropdownItemKeyDown(e, 'portfolio', index, portfolioItems.length)}
-                                    onClick={() => {
-                                      setActiveTab('portfolio');
-                                      setActiveDropdown(null);
-                                    }}
-                                  >
-                                    <div className="mega-item-icon-wrapper red-theme">
-                                      {sub.icon}
-                                    </div>
-                                    <div className="mega-item-text">
-                                      <span className="mega-item-title">
-                                        {sub.title} <span className="arrow-hover">→</span>
-                                      </span>
-                                      <span className="mega-item-desc">{sub.desc}</span>
-                                    </div>
-                                  </a>
-                                ))}
-                              </div>
-                            </div>
+                            )}
 
                             {/* Center Column: Collaboration */}
-                            <div className="mega-menu-column">
-                              <div className="mega-column-header">
-                                <svg className="mega-header-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2.5">
-                                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-                                  <circle cx="9" cy="7" r="4"/>
-                                  <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
-                                  <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-                                </svg>
-                                <h3>COLLABORATION</h3>
+                            {item.id === 'collaboration' && (
+                              <div className="mega-menu-column">
+                                <div className="mega-column-header">
+                                  <svg className="mega-header-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2.5">
+                                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                                    <circle cx="9" cy="7" r="4"/>
+                                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                                    <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                                  </svg>
+                                  <h3>COLLABORATION</h3>
+                                </div>
+                                <div className="mega-links-list">
+                                  {collaborationItems.map((sub, index) => (
+                                    <a
+                                      key={sub.title}
+                                      href={sub.path}
+                                      ref={(el) => (dropdownRefs.current[`collaboration-${index}`] = el)}
+                                      className="mega-item-link"
+                                      role="menuitem"
+                                      onKeyDown={(e) => handleDropdownItemKeyDown(e, 'collaboration', index, collaborationItems.length)}
+                                      onClick={() => {
+                                        setActiveTab('collaboration');
+                                        setActiveDropdown(null);
+                                      }}
+                                    >
+                                      <div className="mega-item-icon-wrapper blue-theme">
+                                        {sub.icon}
+                                      </div>
+                                      <div className="mega-item-text">
+                                        <span className="mega-item-title">
+                                          {sub.title} <span className="arrow-hover">→</span>
+                                        </span>
+                                        <span className="mega-item-desc">{sub.desc}</span>
+                                      </div>
+                                    </a>
+                                  ))}
+                                </div>
                               </div>
-                              <div className="mega-links-list">
-                                {collaborationItems.map((sub, index) => (
-                                  <a
-                                    key={sub.title}
-                                    href={sub.path}
-                                    ref={(el) => (dropdownRefs.current[`collaboration-${index}`] = el)}
-                                    className="mega-item-link"
-                                    role="menuitem"
-                                    onKeyDown={(e) => handleDropdownItemKeyDown(e, 'collaboration', index, collaborationItems.length)}
-                                    onClick={() => {
-                                      setActiveTab('collaboration');
-                                      setActiveDropdown(null);
-                                    }}
-                                  >
-                                    <div className="mega-item-icon-wrapper blue-theme">
-                                      {sub.icon}
-                                    </div>
-                                    <div className="mega-item-text">
-                                      <span className="mega-item-title">
-                                        {sub.title} <span className="arrow-hover">→</span>
-                                      </span>
-                                      <span className="mega-item-desc">{sub.desc}</span>
-                                    </div>
-                                  </a>
-                                ))}
-                              </div>
-                            </div>
+                            )}
 
                             {/* Right Column: Promotional Card */}
                             <div className="mega-promo-card">
@@ -445,7 +512,28 @@ export default function Header() {
                                 setActiveDropdown(null);
                               }}
                             >
-                              {sub.title}
+                              <div className="mega-item-icon-wrapper" style={{
+                                width: '36px',
+                                height: '36px',
+                                borderRadius: '10px',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                flexShrink: 0,
+                                transition: 'all 0.3s ease',
+                                backgroundColor: `${sub.color}15`,
+                                color: sub.color
+                              }}>
+                                {sub.icon}
+                              </div>
+                              <div className="mega-item-text" style={{ display: 'flex', flexDirection: 'column', textAlign: 'left' }}>
+                                <span className="mega-item-title" style={{ fontSize: '0.88rem', fontWeight: 700, color: 'var(--color-text-primary)' }}>
+                                  {sub.title} <span className="arrow-hover">→</span>
+                                </span>
+                                <span className="mega-item-desc" style={{ fontSize: '0.72rem', color: 'var(--color-text-secondary)', marginTop: '2px', lineHeight: '1.3' }}>
+                                  {sub.desc}
+                                </span>
+                              </div>
                             </a>
                           ))}
                         </div>
