@@ -3,6 +3,10 @@ import Header from './components/common/Header';
 import Home from './pages/Home/Home';
 import Footer from './components/common/Footer';
 import Cursor from './components/common/Cursor';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 // Page Imports
 import About from './pages/About/About';
@@ -13,6 +17,36 @@ import Portfolio from './pages/Portfolio/Portfolio';
 import Collaboration from './pages/Collaboration/Collaboration';
 import Menu from './pages/Menu/Menu';
 import Contact from './pages/Contact/Contact';
+
+// Service Card Image Imports
+import softwareDevImg from './assets/software_dev.png';
+import cloudServicesImg from './assets/cloud_services.png';
+import devopsAutomationImg from './assets/devops_automation.png';
+import aiAutomationImg from './assets/ai_automation.png';
+import cybersecurityImg from './assets/cybersecurity.png';
+import itInfrastructureImg from './assets/it_infrastructure.png';
+import managedItImg from './assets/managed_it.jpg';
+import supportMaintenanceImg from './assets/support_maintenance.jpg';
+
+// Rennto Product Image Imports
+import renntoLogo from './assets/rennto.png';
+import rennto1 from './assets/rennto1.png';
+import rennto2 from './assets/rennto2.png';
+import rennto3 from './assets/rennto3.png';
+import rennto4 from './assets/rennto4.png';
+
+// TX-Hub Product Image Imports
+import txhubLogo from './assets/TXhublogo.png';
+import txhub1 from './assets/txhub1.png';
+import txhub2 from './assets/txhub2.png';
+import txhub3 from './assets/txhub3.png';
+import txhub4 from './assets/txhub4.png';
+
+// Brand Logo Imports
+import transcriptsLogo from './assets/transcripts_logo.png';
+import chatawayLogo from './assets/chataway_logo.png';
+import animationHomeVideo from './assets/annimationhome.mp4';
+import aiAnimationVideo from './assets/AIannimation.mp4';
 
 // Helper Icons for Certifications & Compliance
 const CertIcon = () => (
@@ -46,6 +80,26 @@ const GdprIcon = () => (
 
 function App() {
   const [currentHash, setCurrentHash] = useState(window.location.hash || '#home');
+  const [renntoActiveIndex, setRenntoActiveIndex] = useState(0);
+  const [renntoLightboxImg, setRenntoLightboxImg] = useState(null);
+  const renntoScreens = [rennto1, rennto2, rennto3, rennto4];
+
+  const [txhubActiveIndex, setTxhubActiveIndex] = useState(0);
+  const txhubScreens = [txhub1, txhub2, txhub3, txhub4];
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setRenntoActiveIndex((prev) => (prev + 1) % renntoScreens.length);
+    }, 3000);
+    return () => clearInterval(timer);
+  }, [renntoScreens.length]);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTxhubActiveIndex((prev) => (prev + 1) % txhubScreens.length);
+    }, 3000);
+    return () => clearInterval(timer);
+  }, [txhubScreens.length]);
 
   useEffect(() => {
     const handleHashChange = () => {
@@ -59,6 +113,117 @@ function App() {
     window.addEventListener('hashchange', handleHashChange);
     return () => window.removeEventListener('hashchange', handleHashChange);
   }, []);
+
+  useEffect(() => {
+    if (currentHash === '#home') {
+      // Swipe animation for Directory cards
+      const cards = gsap.utils.toArray('.directory-card-modern-grad');
+      if (cards.length >= 3) {
+        gsap.fromTo(cards[0], 
+          { x: -150, opacity: 0 },
+          { 
+            x: 0, 
+            opacity: 1, 
+            duration: 1.2, 
+            ease: 'power3.out',
+            scrollTrigger: {
+              trigger: '.directory-container-three-col',
+              start: 'top 85%',
+              toggleActions: 'play none none none'
+            }
+          }
+        );
+
+        gsap.fromTo(cards[1], 
+          { y: 120, opacity: 0 },
+          { 
+            y: 0, 
+            opacity: 1, 
+            duration: 1.2, 
+            ease: 'power3.out',
+            scrollTrigger: {
+              trigger: '.directory-container-three-col',
+              start: 'top 85%',
+              toggleActions: 'play none none none'
+            }
+          }
+        );
+
+        gsap.fromTo(cards[2], 
+          { x: 150, opacity: 0 },
+          { 
+            x: 0, 
+            opacity: 1, 
+            duration: 1.2, 
+            ease: 'power3.out',
+            scrollTrigger: {
+              trigger: '.directory-container-three-col',
+              start: 'top 85%',
+              toggleActions: 'play none none none'
+            }
+          }
+        );
+      }
+
+      // Parallax for Newsletter Orbs
+      gsap.fromTo('.newsletter-bg-orb-1', 
+        { y: -80, scale: 0.8 },
+        {
+          y: 80,
+          scale: 1.15,
+          scrollTrigger: {
+            trigger: '.stay-ahead-newsletter-section',
+            start: 'top bottom',
+            end: 'bottom top',
+            scrub: 1.2
+          }
+        }
+      );
+      gsap.fromTo('.newsletter-bg-orb-2', 
+        { y: 80, scale: 0.95 },
+        {
+          y: -80,
+          scale: 1.25,
+          scrollTrigger: {
+            trigger: '.stay-ahead-newsletter-section',
+            start: 'top bottom',
+            end: 'bottom top',
+            scrub: 1.2
+          }
+        }
+      );
+
+      // Parallax for Accelerate Shapes
+      gsap.fromTo('.accelerate-bg-shape-1', 
+        { y: -70, x: -20, rotate: 0 },
+        {
+          y: 70,
+          x: 20,
+          rotate: 45,
+          scrollTrigger: {
+            trigger: '.accelerate-banner-section',
+            start: 'top bottom',
+            end: 'bottom top',
+            scrub: 1
+          }
+        }
+      );
+      gsap.fromTo('.accelerate-bg-shape-2', 
+        { y: 70, x: 20, rotate: 0 },
+        {
+          y: -70,
+          x: -20,
+          rotate: -45,
+          scrollTrigger: {
+            trigger: '.accelerate-banner-section',
+            start: 'top bottom',
+            end: 'bottom top',
+            scrub: 1
+          }
+        }
+      );
+    }
+  }, [currentHash]);
 
   const renderContent = () => {
     switch (currentHash) {
@@ -144,9 +309,22 @@ function App() {
                   </div>
                 </div>
 
-                {/* Right Column: Advanced morphing particle simulation */}
+                {/* Right Column: High-end animation video */}
                 <div className="hero-right-col">
-                  <Home />
+                  <video 
+                    src={animationHomeVideo}
+                    autoPlay 
+                    loop 
+                    muted 
+                    playsInline 
+                    ref={(el) => {
+                      if (el) {
+                        el.muted = true;
+                        el.play().catch(err => console.log("Autoplay failed:", err));
+                      }
+                    }}
+                    className="hero-animation-video"
+                  />
                 </div>
               </div>
             </main>
@@ -256,47 +434,15 @@ function App() {
 
                       <div className="clients-carousel-row">
                         {/* 100 Transcripts */}
-                        <div className="client-logo-card card-l-1" title="100 Transcripts">
-                          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2.5" style={{ color: '#60A5FA' }}>
-                            <path d="M4 19V6.2h3L12.5 13V6.2H15v12.8h-2.8L6.5 12v7H4z"/>
-                            <circle cx="19" cy="12" r="3" fill="none" stroke="currentColor" strokeWidth="2.5"/>
-                          </svg>
-                          <span className="text-100transcripts">100 Transcripts</span>
-                        </div>
+                        <a href="https://100transcripts.com/#" target="_blank" rel="noopener noreferrer" className="client-logo-card card-l-1" title="100 Transcripts">
+                          <img src={transcriptsLogo} alt="100 Transcripts Logo" className="client-logo-img transcripts-logo" />
+                        </a>
 
                         {/* Chataway */}
-                        <div className="client-logo-card card-l-2" title="Chataway">
-                          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2.5" style={{ color: '#F472B6' }}>
-                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
-                          </svg>
-                          <span className="text-chataway">Chataway</span>
-                        </div>
-
-                        {/* InnovaNext */}
-                        <div className="client-logo-card card-l-3" title="InnovaNext">
-                          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2.5" style={{ color: '#34D399' }}>
-                            <polygon points="12 2 2 22 22 22"/>
-                          </svg>
-                          <span className="text-innovanext">InnovaNext</span>
-                        </div>
-
-                        {/* DataHive */}
-                        <div className="client-logo-card card-l-4" title="DataHive">
-                          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2.5" style={{ color: '#FBBF24' }}>
-                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-                          </svg>
-                          <span className="text-datahive">DataHive</span>
-                        </div>
-
-                        {/* Softgrid Solutions */}
-                        <div className="client-logo-card card-l-5" title="Softgrid Solutions">
-                          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2.5" style={{ color: '#818CF8' }}>
-                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
-                            <line x1="9" y1="3" x2="9" y2="21"/>
-                            <line x1="15" y1="3" x2="15" y2="21"/>
-                          </svg>
-                          <span className="text-softgrid">Softgrid Solutions</span>
-                        </div>
+                        <a href="https://play.google.com/store/apps/details?id=com.chatawayplus.app&hl=en_IN" target="_blank" rel="noopener noreferrer" className="client-logo-card card-l-2" title="Chataway">
+                          <img src={chatawayLogo} alt="Chataway Logo" className="client-logo-img chataway-logo" />
+                          <span className="client-logo-text">chatAway</span>
+                        </a>
                       </div>
                     </div>
 
@@ -335,61 +481,116 @@ function App() {
                   <p className="section-desc">We deliver end-to-end digital transformation through specialized technology capabilities tailored to your business goals.</p>
                 </div>
                 <div className="services-grid">
+                  {/* Card 1: Software Development */}
                   <div className="service-card">
-                    <div className="service-icon-box blue-glow">
-                      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+                    <div className="service-card-image-wrapper blue-glow-border">
+                      <img src={softwareDevImg} alt="Software Development Services" className="service-card-img" />
                     </div>
-                    <h3>Software Development Services</h3>
-                    <p>Custom software engineering, legacy modernization, enterprise web apps, and API integrations.</p>
+                    <div className="service-card-content">
+                      <div className="service-icon-box blue-glow">
+                        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+                      </div>
+                      <h3>Software Development Services</h3>
+                      <p>Custom software engineering, legacy modernization, enterprise web apps, and API integrations.</p>
+                    </div>
                   </div>
+ 
+                  {/* Card 2: Cloud Services */}
                   <div className="service-card">
-                    <div className="service-icon-box purple-glow">
-                      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg>
+                    <div className="service-card-image-wrapper purple-glow-border">
+                      <img src={cloudServicesImg} alt="Cloud Services" className="service-card-img" />
                     </div>
-                    <h3>Cloud Services</h3>
-                    <p>Public, private, and hybrid cloud migration, serverless computing, architectures, and operations.</p>
+                    <div className="service-card-content">
+                      <div className="service-icon-box purple-glow">
+                        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg>
+                      </div>
+                      <h3>Cloud Services</h3>
+                      <p>Public, private, and hybrid cloud migration, serverless computing, architectures, and operations.</p>
+                    </div>
                   </div>
+ 
+                  {/* Card 3: DevOps & Automation */}
                   <div className="service-card">
-                    <div className="service-icon-box red-glow">
-                      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 12c-2-2.67-4-4-6-4a4 4 0 1 0 0 8c2 0 4-1.33 6-4zm0 0c2 2.67 4 4 6 4a4 4 0 1 0 0-8c-2 0-4 1.33-6 4z"/></svg>
+                    <div className="service-card-image-wrapper red-glow-border">
+                      <img src={devopsAutomationImg} alt="DevOps & Automation" className="service-card-img" />
                     </div>
-                    <h3>DevOps & Automation</h3>
-                    <p>CI/CD pipelines, Infrastructure as Code, Kubernetes orchestration, and continuous monitoring.</p>
+                    <div className="service-card-content">
+                      <div className="service-icon-box red-glow">
+                        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 12c-2-2.67-4-4-6-4a4 4 0 1 0 0 8c2 0 4-1.33 6-4zm0 0c2 2.67 4 4 6 4a4 4 0 1 0 0-8c-2 0-4 1.33-6 4z"/></svg>
+                      </div>
+                      <h3>DevOps & Automation</h3>
+                      <p>CI/CD pipelines, Infrastructure as Code, Kubernetes orchestration, and continuous monitoring.</p>
+                    </div>
                   </div>
+ 
+                  {/* Card 4: AI & Intelligent Automation */}
                   <div className="service-card">
-                    <div className="service-icon-box blue-glow">
-                      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2"><path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96-.44 2.5 2.5 0 0 1 0-3.12 3 3 0 0 1 0-4.88 2.5 2.5 0 0 1 0-3.12A2.5 2.5 0 0 1 9.5 2zM14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96-.44 2.5 2.5 0 0 0 0-3.12 3 3 0 0 0 0-4.88 2.5 2.5 0 0 0 0-3.12A2.5 2.5 0 0 0 14.5 2z"/></svg>
+                    <div className="service-card-image-wrapper blue-glow-border">
+                      <img src={aiAutomationImg} alt="AI & Intelligent Automation" className="service-card-img" />
                     </div>
-                    <h3>AI & Intelligent Automation</h3>
-                    <p>Machine learning workflows, natural language processing, predictive modeling, and intelligent agents.</p>
+                    <div className="service-card-content">
+                      <div className="service-icon-box blue-glow">
+                        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2"><path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96-.44 2.5 2.5 0 0 1 0-3.12 3 3 0 0 1 0-4.88 2.5 2.5 0 0 1 0-3.12A2.5 2.5 0 0 1 9.5 2zM14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96-.44 2.5 2.5 0 0 0 0-3.12 3 3 0 0 0 0-4.88 2.5 2.5 0 0 0 0-3.12A2.5 2.5 0 0 0 14.5 2z"/></svg>
+                      </div>
+                      <h3>AI & Intelligent Automation</h3>
+                      <p>Machine learning workflows, natural language processing, predictive modeling, and intelligent agents.</p>
+                    </div>
                   </div>
+ 
+                  {/* Card 5: Cybersecurity Services */}
                   <div className="service-card">
-                    <div className="service-icon-box purple-glow">
-                      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                    <div className="service-card-image-wrapper purple-glow-border">
+                      <img src={cybersecurityImg} alt="Cybersecurity Services" className="service-card-img" />
                     </div>
-                    <h3>Cybersecurity Services</h3>
-                    <p>Threat detection, vulnerability assessments, compliance alignment, and zero-trust framework execution.</p>
+                    <div className="service-card-content">
+                      <div className="service-icon-box purple-glow">
+                        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                      </div>
+                      <h3>Cybersecurity Services</h3>
+                      <p>Threat detection, vulnerability assessments, compliance alignment, and zero-trust framework execution.</p>
+                    </div>
                   </div>
+ 
+                  {/* Card 6: IT Infrastructure Services */}
                   <div className="service-card">
-                    <div className="service-icon-box red-glow">
-                      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"/><rect x="2" y="14" width="20" height="8" rx="2" ry="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>
+                    <div className="service-card-image-wrapper red-glow-border">
+                      <img src={itInfrastructureImg} alt="IT Infrastructure Services" className="service-card-img" />
                     </div>
-                    <h3>IT Infrastructure Services</h3>
-                    <p>Network engineering, modern datacenter design, virtualization, and hybrid work setups.</p>
+                    <div className="service-card-content">
+                      <div className="service-icon-box red-glow">
+                        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"/><rect x="2" y="14" width="20" height="8" rx="2" ry="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>
+                      </div>
+                      <h3>IT Infrastructure Services</h3>
+                      <p>Network engineering, modern datacenter design, virtualization, and hybrid work setups.</p>
+                    </div>
                   </div>
+ 
+                  {/* Card 7: Managed IT Services */}
                   <div className="service-card">
-                    <div className="service-icon-box blue-glow">
-                      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+                    <div className="service-card-image-wrapper blue-glow-border">
+                      <img src={managedItImg} alt="Managed IT Services" className="service-card-img" />
                     </div>
-                    <h3>Managed IT Services</h3>
-                    <p>24/7 helpdesk monitoring, asset governance, backup systems, and routine infrastructure health updates.</p>
+                    <div className="service-card-content">
+                      <div className="service-icon-box blue-glow">
+                        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+                      </div>
+                      <h3>Managed IT Services</h3>
+                      <p>24/7 helpdesk monitoring, asset governance, backup systems, and routine infrastructure health updates.</p>
+                    </div>
                   </div>
+ 
+                  {/* Card 8: Support & Maintenance */}
                   <div className="service-card">
-                    <div className="service-icon-box purple-glow">
-                      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+                    <div className="service-card-image-wrapper purple-glow-border">
+                      <img src={supportMaintenanceImg} alt="Support & Maintenance" className="service-card-img" />
                     </div>
-                    <h3>Support & Maintenance</h3>
-                    <p>SLA-backed systems troubleshooting, emergency hotfixes, package updates, and routine checks.</p>
+                    <div className="service-card-content">
+                      <div className="service-icon-box purple-glow">
+                        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+                      </div>
+                      <h3>Support & Maintenance</h3>
+                      <p>SLA-backed systems troubleshooting, emergency hotfixes, package updates, and routine checks.</p>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -419,32 +620,131 @@ function App() {
                   <div className="unified-card-right-grid">
                     
                     {/* Product 1: Rennto */}
-                    <div className="product-item-inner item-blue">
-                      <div className="product-item-icon-wrapper">
-                        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2.5">
-                          <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
-                          <line x1="9" y1="3" x2="9" y2="21"/>
-                          <line x1="9" y1="9" x2="21" y2="9"/>
-                          <line x1="9" y1="15" x2="21" y2="15"/>
-                        </svg>
+                    <div className="product-item-inner item-blue rennto-product-card">
+                      <div className="product-item-header">
+                        <div className="product-item-logo-wrapper">
+                          <img src={renntoLogo} alt="Rennto Logo" className="rennto-logo-img" />
+                        </div>
+                        <div className="product-item-title-desc">
+                          <h3>Rennto</h3>
+                          <span className="product-tag">Operations & Logistics</span>
+                        </div>
                       </div>
                       <div className="product-item-info">
-                        <h3>Rennto</h3>
                         <p>Business operations & service management platform designed to streamline logistics, governance, and resource tracking.</p>
+                        
+                        {/* Interactive Screenshot Showcase */}
+                        <div className="rennto-screenshot-showcase">
+                          <div className="rennto-screenshot-viewer">
+                            <img 
+                              src={renntoScreens[renntoActiveIndex]} 
+                              alt={`Rennto Screen ${renntoActiveIndex + 1}`} 
+                              className="rennto-active-screen" 
+                              onClick={() => setRenntoLightboxImg(renntoScreens[renntoActiveIndex])}
+                              style={{ cursor: 'zoom-in' }}
+                            />
+                            <div className="rennto-nav-overlay">
+                              <button 
+                                className="rennto-nav-btn prev" 
+                                onClick={(e) => {
+                                  e.preventDefault();
+                                  setRenntoActiveIndex((prev) => (prev === 0 ? renntoScreens.length - 1 : prev - 1));
+                                }}
+                              >
+                                &#8592;
+                              </button>
+                              <button 
+                                className="rennto-nav-btn next" 
+                                onClick={(e) => {
+                                  e.preventDefault();
+                                  setRenntoActiveIndex((prev) => (prev === renntoScreens.length - 1 ? 0 : prev + 1));
+                                }}
+                              >
+                                &#8594;
+                              </button>
+                            </div>
+                          </div>
+                          <div className="rennto-thumbnails">
+                            {renntoScreens.map((screen, idx) => (
+                              <button
+                                key={idx}
+                                className={`rennto-thumb-btn ${renntoActiveIndex === idx ? 'active' : ''}`}
+                                onClick={(e) => {
+                                  e.preventDefault();
+                                  setRenntoActiveIndex(idx);
+                                }}
+                              >
+                                <img src={screen} alt={`Thumbnail ${idx + 1}`} />
+                              </button>
+                            ))}
+                          </div>
+                        </div>
+                        
                         <a href="#products" className="view-demo-link text-blue">Request Demo &rarr;</a>
                       </div>
                     </div>
 
                     {/* Product 2: TX-Hub */}
-                    <div className="product-item-inner item-red">
-                      <div className="product-item-icon-wrapper">
-                        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2.5">
-                          <path d="M12 22V12m0 0l-8-4m8 4l8-4M4 6v6l8 4 8-4V6L12 2 4 6z"/>
-                        </svg>
+                    <div className="product-item-inner item-red txhub-product-card">
+                      <div className="product-item-header">
+                        <div className="product-item-logo-wrapper">
+                          <img src={txhubLogo} alt="TX-Hub Logo" className="rennto-logo-img" />
+                        </div>
+                        <div className="product-item-title-desc">
+                          <h3>TX-Hub</h3>
+                          <span className="product-tag">Workflow & Analytics</span>
+                        </div>
                       </div>
                       <div className="product-item-info">
-                        <h3>TX-Hub</h3>
                         <p>Workflow automation, collaboration & analytics platform to unify engineering pipelines and optimize deployment loops.</p>
+                        
+                        {/* Interactive Screenshot Showcase */}
+                        <div className="rennto-screenshot-showcase">
+                          <div className="txhub-screenshot-viewer">
+                            <img 
+                              src={txhubScreens[txhubActiveIndex]} 
+                              alt={`TX-Hub Screen ${txhubActiveIndex + 1}`} 
+                              className="txhub-active-screen" 
+                              onClick={() => setRenntoLightboxImg(txhubScreens[txhubActiveIndex])}
+                              style={{ cursor: 'zoom-in' }}
+                            />
+                            <div className="rennto-nav-overlay">
+                              <button 
+                                className="rennto-nav-btn prev" 
+                                onClick={(e) => {
+                                  e.preventDefault();
+                                  setTxhubActiveIndex((prev) => (prev === 0 ? txhubScreens.length - 1 : prev - 1));
+                                }}
+                              >
+                                &#8592;
+                              </button>
+                              <button 
+                                className="rennto-nav-btn next" 
+                                onClick={(e) => {
+                                  e.preventDefault();
+                                  setTxhubActiveIndex((prev) => (prev === txhubScreens.length - 1 ? 0 : prev + 1));
+                                }}
+                              >
+                                &#8594;
+                              </button>
+                            </div>
+                          </div>
+                          <div className="rennto-thumbnails">
+                            {txhubScreens.map((screen, idx) => (
+                              <button
+                                key={idx}
+                                className={`rennto-thumb-btn ${txhubActiveIndex === idx ? 'active' : ''}`}
+                                onClick={(e) => {
+                                  e.preventDefault();
+                                  setTxhubActiveIndex(idx);
+                                }}
+                              >
+                                <img src={screen} alt={`Thumbnail ${idx + 1}`} />
+                              </button>
+                            ))}
+                          </div>
+                        </div>
+                        
                         <a href="#products" className="view-demo-link text-red">Request Demo &rarr;</a>
                       </div>
                     </div>
@@ -455,12 +755,13 @@ function App() {
             </section>
 
             {/* Directory Showcase (3 Columns Layout) */}
-            {/* Directory Showcase (3 Columns Layout wrapped in stylish cards) */}
+             {/* Directory Showcase (3 Columns Layout wrapped in stylish cards) */}
             <section className="directory-showcase-section">
               <div className="directory-container-three-col">
                 
                 {/* Column 1: Solutions We Provide */}
                 <div className="directory-card-modern-grad grad-blue">
+                  <div className="directory-card-blur-bg"></div>
                   <div className="directory-card-header">
                     <div className="directory-icon-circle bg-blue-grad">
                       <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2.5">
@@ -484,6 +785,7 @@ function App() {
 
                 {/* Column 2: Industries Served */}
                 <div className="directory-card-modern-grad grad-red">
+                  <div className="directory-card-blur-bg"></div>
                   <div className="directory-card-header">
                     <div className="directory-icon-circle bg-red-grad">
                       <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2.5">
@@ -506,6 +808,7 @@ function App() {
 
                 {/* Column 3: Technology Expertise */}
                 <div className="directory-card-modern-grad grad-purple">
+                  <div className="directory-card-blur-bg"></div>
                   <div className="directory-card-header">
                     <div className="directory-icon-circle bg-purple-grad">
                       <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2.5">
@@ -532,6 +835,8 @@ function App() {
             {/* Ready to Accelerate Banner & Why Partner With Us Section */}
             <section className="accelerate-banner-section">
               <div className="accelerate-container">
+                <div className="accelerate-bg-shape-1"></div>
+                <div className="accelerate-bg-shape-2"></div>
                 
                 {/* Left Side: Copy and Actions */}
                 <div className="accelerate-left">
@@ -622,6 +927,8 @@ function App() {
 
             {/* Stay Ahead of Technology Trends Newsletter Section */}
             <section className="stay-ahead-newsletter-section">
+              <div className="newsletter-bg-orb-1"></div>
+              <div className="newsletter-bg-orb-2"></div>
               <div className="stay-ahead-container">
                 
                 {/* Left Side: Copy & Info */}
@@ -722,6 +1029,16 @@ function App() {
 
       {/* Global Footer */}
       <Footer />
+
+      {/* Rennto Screenshot Lightbox Modal */}
+      {renntoLightboxImg && (
+        <div className="rennto-lightbox-overlay" onClick={() => setRenntoLightboxImg(null)}>
+          <div className="rennto-lightbox-content" onClick={(e) => e.stopPropagation()}>
+            <button className="rennto-lightbox-close" onClick={() => setRenntoLightboxImg(null)}>&times;</button>
+            <img src={renntoLightboxImg} alt="Enlarged Rennto Screenshot" className="rennto-lightbox-img" />
+          </div>
+        </div>
+      )}
     </div>
   );
 }

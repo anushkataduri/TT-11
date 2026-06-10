@@ -172,12 +172,48 @@ const menuItems = [
   }
 ];
 
+const moreItems = [
+  {
+    title: 'Services',
+    desc: 'Explore our technology capabilities and offerings.',
+    path: '#services',
+    icon: (
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+        <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+        <line x1="8" y1="21" x2="16" y2="21"/>
+        <line x1="12" y1="17" x2="12" y2="21"/>
+      </svg>
+    ),
+    color: '#3B82F6'
+  },
+  {
+    title: 'Solutions',
+    desc: 'Targeted tech solutions for enterprise problems.',
+    path: '#solutions',
+    icon: (
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+        <line x1="9" y1="3" x2="9" y2="21"/>
+      </svg>
+    ),
+    color: '#10B981'
+  },
+  {
+    title: 'Industries',
+    desc: 'Tailored technology across sectors.',
+    path: '#industries',
+    icon: (
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+      </svg>
+    ),
+    color: '#FF1E3C'
+  }
+];
+
 const navigationData = [
-  { id: 'home', label: 'Home', path: '#home' },
   { id: 'about', label: 'About Us', path: '#about' },
-  { id: 'services', label: 'Services', path: '#services' },
-  { id: 'solutions', label: 'Solutions', path: '#solutions' },
-  { id: 'industries', label: 'Industries', path: '#industries' },
+  { id: 'more', label: 'More', path: '#more', hasSimpleDropdown: true },
   { id: 'portfolio', label: 'Portfolio', path: '#portfolio', hasMegaMenu: true },
   { id: 'collaboration', label: 'Collaboration', path: '#collaboration', hasMegaMenu: true },
   { id: 'menu', label: 'Menu', path: '#menu', hasSimpleDropdown: true }
@@ -349,7 +385,10 @@ export default function Header() {
           <a 
             href="#home" 
             className="logo-container" 
-            onClick={() => setActiveTab('home')}
+            onClick={() => {
+              setActiveTab('home');
+              window.location.hash = '#home';
+            }}
             aria-label="Tanvox Technologies Home"
           >
             <img src={logo} alt="Tanvox Technologies Logo" className="logo-image" />
@@ -499,16 +538,16 @@ export default function Header() {
                       {/* Simple Dropdown */}
                       {isSimple && (
                         <div className="simple-dropdown" role="menu" aria-label={`${item.label} dropdown`}>
-                          {menuItems.map((sub, index) => (
+                          {(item.id === 'more' ? moreItems : menuItems).map((sub, index) => (
                             <a
                               key={sub.title}
                               href={sub.path}
-                              ref={(el) => (dropdownRefs.current[`menu-${index}`] = el)}
+                              ref={(el) => (dropdownRefs.current[`${item.id}-${index}`] = el)}
                               className="simple-dropdown-link"
                               role="menuitem"
-                              onKeyDown={(e) => handleDropdownItemKeyDown(e, 'menu', index, menuItems.length)}
+                              onKeyDown={(e) => handleDropdownItemKeyDown(e, item.id, index, (item.id === 'more' ? moreItems : menuItems).length)}
                               onClick={() => {
-                                setActiveTab('menu');
+                                setActiveTab(item.id === 'more' ? sub.title.toLowerCase() : 'menu');
                                 setActiveDropdown(null);
                               }}
                             >
@@ -644,13 +683,13 @@ export default function Header() {
                             ))}
                           </>
                         )}
-                        {isSimple && menuItems.map((sub) => (
+                        {isSimple && (item.id === 'more' ? moreItems : menuItems).map((sub) => (
                           <a
                             key={sub.title}
                             href={sub.path}
                             className="mobile-dropdown-link"
                             onClick={() => {
-                              setActiveTab('menu');
+                              setActiveTab(item.id === 'more' ? sub.title.toLowerCase() : 'menu');
                               setMobileMenuOpen(false);
                             }}
                           >

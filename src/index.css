@@ -626,6 +626,19 @@ button {
   width: auto;
 }
 
+/* Reduced size specifically for header contact button */
+.cta-section .cta-button {
+  height: 40px !important;
+  padding: 0 1.25rem !important;
+  font-size: 0.88rem !important;
+  min-width: auto !important;
+}
+
+.cta-section .cta-arrow-circle {
+  width: 18px !important;
+  height: 18px !important;
+}
+
 .cta-button:hover,
 .cta-button:focus-visible {
   transform: translateY(-2px);
@@ -954,10 +967,8 @@ button {
   width: 100%;
   display: flex;
   align-items: center;
-  justify-content: flex-end;
-  /* Push the globe right to avoid overlapping left CTA buttons */
-  padding-right: 3.5rem;
-  /* Safe padding to prevent labels from clipping the right viewport edge */
+  justify-content: center;
+  padding-right: 0 !important;
   position: relative;
 }
 
@@ -1028,24 +1039,36 @@ button {
 }
 
 .hero-actions {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  gap: 0.75rem 1rem;
+  justify-content: flex-start;
   align-items: center;
-  gap: 1rem;
-  flex-wrap: nowrap;
+  max-width: 100%;
 }
 
 .hero-actions .cta-button,
 .hero-actions .hero-btn-outline {
   border-radius: 8px;
+  height: 44px;
+  padding: 0 1.25rem;
+  font-size: 0.88rem;
+  min-width: auto;
+}
+
+/* Center Get Started button below the first two buttons */
+.hero-actions a:nth-child(3) {
+  grid-column: 1 / span 2;
+  justify-self: center;
 }
 
 .hero-btn-outline {
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: 0.95rem;
+  font-size: 0.88rem;
   color: #0F172A;
-  height: 52px;
-  padding: 0 1.6rem;
+  height: 44px;
+  padding: 0 1.25rem;
   border: 2px solid rgba(15, 23, 42, 0.12);
   display: inline-flex;
   align-items: center;
@@ -2121,19 +2144,47 @@ button {
   border: 1px solid rgba(15, 23, 42, 0.05);
   border-radius: 16px;
   /* Smooth curves */
-  padding: 1.5rem;
-  /* Luxury padding */
+  padding: 0;
+  /* Reset padding for full-width card images */
   transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: stretch;
   box-shadow: 0 10px 25px rgba(37, 99, 235, 0.03);
+  overflow: hidden;
 }
 
 .service-card:hover {
   transform: translateY(-8px) scale(1.02);
   border-color: rgba(37, 99, 235, 0.2);
   box-shadow: 0 15px 35px rgba(37, 99, 235, 0.08);
+}
+
+.service-card-image-wrapper {
+  width: 100%;
+  height: 180px;
+  overflow: hidden;
+  position: relative;
+  border-bottom: 1px solid rgba(15, 23, 42, 0.04);
+}
+
+.service-card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.service-card:hover .service-card-image {
+  transform: scale(1.08);
+}
+
+.service-card-content {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  flex-grow: 1;
 }
 
 @keyframes serviceCardShift {
@@ -3296,7 +3347,7 @@ button {
 
 /* --- Products & Platforms Dedicated Section --- */
 .products-platforms-section {
-  background-color: var(--color-light-gray);
+  background-color: #FAFAFA !important; /* Whitish color background instead of blue */
   padding: 3rem 0;
   position: relative;
   z-index: 2;
@@ -3306,16 +3357,14 @@ button {
 .unified-products-card {
   position: relative;
   overflow: hidden;
-  background: linear-gradient(135deg, #020B2D 0%, #0c1c4e 50%, #020B2D 100%);
-  background-size: 200% 200%;
-  animation: cardGradientShift 10s ease infinite;
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: #FFFFFF !important; /* Clean white background card */
+  border: 1px solid rgba(15, 23, 42, 0.08) !important;
   border-radius: 24px;
   padding: 2.5rem;
   display: grid;
   grid-template-columns: 1fr 1.8fr;
   gap: 2.5rem;
-  box-shadow: 0 25px 60px rgba(15, 23, 42, 0.15);
+  box-shadow: 0 20px 50px rgba(15, 23, 42, 0.04) !important;
   z-index: 1;
 }
 
@@ -3325,9 +3374,9 @@ button {
   left: -50%;
   width: 200%;
   height: 200%;
-  background: radial-gradient(circle at 75% 75%, rgba(99, 102, 241, 0.08) 0%, rgba(239, 68, 68, 0.04) 25%, transparent 50%),
-    radial-gradient(circle at 25% 25%, rgba(59, 130, 246, 0.06) 0%, rgba(139, 92, 246, 0.04) 25%, transparent 50%);
-  animation: rotateGlow 25s linear infinite;
+  background: radial-gradient(circle at 75% 75%, rgba(99, 102, 241, 0.08) 0%, rgba(59, 130, 246, 0.04) 30%, transparent 60%),
+    radial-gradient(circle at 25% 25%, rgba(59, 130, 246, 0.08) 0%, rgba(99, 102, 241, 0.04) 30%, transparent 60%) !important;
+  animation: rotateGlow 20s linear infinite;
   pointer-events: none;
   z-index: 0;
 }
@@ -3361,16 +3410,16 @@ button {
   line-height: 1.25;
   margin: 0.5rem 0 1rem 0;
   letter-spacing: -0.02em;
-  background: linear-gradient(135deg, #ffffff 30%, #a5b4fc 100%);
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  background: linear-gradient(135deg, #FF1E3C 0%, #000000 100%) !important; /* Red and Black gradient */
+  background-clip: text !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
 }
 
 .products-desc-modern {
   font-family: var(--font-body);
   font-size: 0.88rem;
-  color: #94A3B8;
+  color: #475569 !important; /* Dark slate gray */
   line-height: 1.55;
 }
 
@@ -3378,9 +3427,9 @@ button {
   font-family: var(--font-display);
   font-size: 0.88rem;
   font-weight: 700;
-  color: #60A5FA;
+  color: #FF1E3C !important; /* Red link color */
   text-decoration: none;
-  border-bottom: 2px solid rgba(96, 165, 250, 0.2);
+  border-bottom: 2px solid rgba(255, 30, 60, 0.2) !important;
   padding-bottom: 0.2rem;
   align-self: flex-start;
   margin-top: 1.25rem;
@@ -3388,8 +3437,8 @@ button {
 }
 
 .view-all-products-link:hover {
-  border-bottom-color: #60A5FA;
-  color: var(--color-white);
+  border-bottom-color: #D6122D !important;
+  color: #D6122D !important;
   transform: translateX(4px);
 }
 
@@ -3408,9 +3457,175 @@ button {
   gap: 1rem;
   padding: 1.5rem;
   border-radius: var(--border-radius-lg);
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255, 255, 255, 0.04);
+  background: #ffffff;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.02);
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+}
+
+.product-item-inner:active {
+  transform: scale(0.97) !important;
+  transition: transform 0.1s ease !important;
+}
+
+/* Rennto Premium Card Layout */
+.rennto-product-card {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem !important;
+}
+
+.product-item-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+}
+
+.product-item-logo-wrapper {
+  width: 48px;
+  height: 48px;
+  background: rgba(15, 23, 42, 0.03);
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  padding: 0.35rem;
+  transition: all 0.3s ease;
+}
+
+.rennto-logo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.product-item-title-desc h3 {
+  margin: 0 !important;
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #0F172A;
+}
+
+.product-tag {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: #2563EB;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-top: 0.1rem;
+}
+
+.rennto-screenshot-showcase {
+  margin: 1.25rem 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.rennto-screenshot-viewer {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  background: #f8fafc;
+}
+
+.rennto-active-screen {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: transform 0.5s ease;
+}
+
+.rennto-screenshot-viewer:hover .rennto-active-screen {
+  transform: scale(1.03);
+}
+
+.rennto-nav-overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 0.75rem;
+  opacity: 0;
+  background: linear-gradient(to top, rgba(2, 11, 45, 0.3) 0%, transparent 100%);
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.rennto-screenshot-viewer:hover .rennto-nav-overlay {
+  opacity: 1;
+}
+
+.rennto-nav-btn {
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+  pointer-events: auto;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.rennto-nav-btn:hover {
+  background: #2563EB;
+  border-color: #3B82F6;
+  transform: scale(1.1);
+}
+
+.rennto-thumbnails {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.5rem;
+}
+
+.rennto-thumb-btn {
+  background: rgba(15, 23, 42, 0.02);
+  border: 2px solid rgba(15, 23, 42, 0.08);
+  border-radius: 6px;
+  overflow: hidden;
+  padding: 0;
+  cursor: pointer;
+  aspect-ratio: 16 / 10;
+  transition: all 0.25s ease;
+}
+
+.rennto-thumb-btn img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.75;
+  transition: opacity 0.25s ease;
+}
+
+.rennto-thumb-btn:hover img,
+.rennto-thumb-btn.active img {
+  opacity: 1;
+}
+
+.rennto-thumb-btn.active {
+  border-color: #2563EB;
+  box-shadow: 0 0 10px rgba(37, 99, 235, 0.2);
+  transform: translateY(-2px);
 }
 
 .product-item-icon-wrapper {
@@ -3440,7 +3655,7 @@ button {
 .product-item-info p {
   font-family: var(--font-body);
   font-size: 0.88rem;
-  color: #94A3B8;
+  color: #334155; /* Dark slate for high contrast readability */
   line-height: 1.45;
   margin-bottom: 0.85rem;
 }
@@ -3541,7 +3756,7 @@ button {
 }
 
 .directory-card-modern-grad {
-  background: linear-gradient(135deg, #F8FAFC 0%, #EFF6FF 50%, #FDF2F8 100%);
+  background: linear-gradient(135deg, #F8FAFC 0%, #EFF6FF 50%, #F1F5F9 100%);
   background-size: 200% 200%;
   animation: cardGradientShift 15s ease infinite;
   border: 1px solid rgba(15, 23, 42, 0.06);
@@ -3583,7 +3798,7 @@ button {
 }
 
 .directory-card-modern-grad.grad-red:hover {
-  background: linear-gradient(135deg, #FDF2F8 0%, #FCE7F3 50%, #FDF2F8 100%);
+  background: linear-gradient(135deg, #FFF5F5 0%, #FFEBEB 50%, #FFF5F5 100%) !important;
   transform: translateY(-8px) scale(1.02);
   /* Swipe jump hover animation */
   box-shadow: 0 20px 45px rgba(255, 30, 60, 0.12);
@@ -3595,7 +3810,7 @@ button {
 }
 
 .directory-card-modern-grad.grad-purple:hover {
-  background: linear-gradient(135deg, #FAF5FF 0%, #F3E8FF 50%, #FAF5FF 100%);
+  background: linear-gradient(135deg, #FAF5FF 0%, #F5EEFF 50%, #FAF5FF 100%) !important;
   transform: translateY(-8px) scale(1.02);
   /* Swipe jump hover animation */
   box-shadow: 0 20px 45px rgba(139, 92, 246, 0.12);
@@ -7110,3 +7325,1300 @@ button {
 .about-page .jp-4 { bottom: 30%; right: 22%; animation: float 9s infinite ease-in-out; }
 .about-page .jp-5 { top: 52%; left: 12%; animation: float 10s infinite ease-in-out; }
 .about-page .jp-6 { top: 48%; right: 10%; animation: float 5s infinite ease-in-out; }
+
+/* Interactive Key Services CSS Graphics & Animations */
+.service-card-image-wrapper {
+  background: #0f172a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  height: 180px;
+  position: relative;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* 1. Software Dev: Glassmorphic IDE Code Window */
+.dev-graphic {
+  background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 1.25rem;
+}
+
+.window-header {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-bottom: 0.75rem;
+  width: 100%;
+}
+
+.window-header .dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.window-header .dot.red { background-color: #ef4444; }
+.window-header .dot.yellow { background-color: #eab308; }
+.window-header .dot.green { background-color: #22c55e; }
+
+.window-title {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: #64748b;
+  margin-left: 0.5rem;
+}
+
+.code-content {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: #e2e8f0;
+  line-height: 1.5;
+  width: 100%;
+}
+
+.code-line {
+  white-space: nowrap;
+}
+
+.code-content .keyword { color: #f43f5e; }
+.code-content .function { color: #3b82f6; }
+.code-content .comment { color: #64748b; font-style: italic; }
+
+.dev-graphic .pulse-glow {
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: #10b981;
+  box-shadow: 0 0 10px #10b981;
+  animation: beaconPulse 2s infinite;
+}
+
+/* 2. Cloud Services: Server LED Grid & Packet Movement */
+.cloud-graphic {
+  background: linear-gradient(135deg, #180c30 0%, #090317 100%);
+}
+
+.cloud-nodes {
+  display: flex;
+  gap: 1rem;
+  z-index: 2;
+}
+
+.cloud-node {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.node-led {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #ef4444;
+  box-shadow: 0 0 4px #ef4444;
+  transition: all 0.3s ease;
+}
+
+.cloud-node.active .node-led {
+  background-color: #a855f7;
+  box-shadow: 0 0 8px #a855f7;
+  animation: ledFlash 1.5s infinite alternate;
+}
+
+.cloud-connection-line {
+  position: absolute;
+  width: 80%;
+  height: 2px;
+  background: rgba(168, 85, 247, 0.2);
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1;
+}
+
+.data-packet {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #c084fc;
+  box-shadow: 0 0 10px #c084fc;
+  top: 50%;
+  left: 10%;
+  transform: translateY(-50%);
+  animation: packetSlide 2.5s infinite linear;
+  z-index: 3;
+}
+
+@keyframes packetSlide {
+  0% { left: 10%; opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { left: 90%; opacity: 0; }
+}
+
+@keyframes ledFlash {
+  0% { opacity: 0.3; }
+  100% { opacity: 1; }
+}
+
+/* 3. DevOps: Infinite Pipeline Loop Animation */
+.devops-graphic {
+  background: linear-gradient(135deg, #1e1b4b 0%, #0f0b29 100%);
+}
+
+.pipeline-loop {
+  position: relative;
+  width: 120px;
+  height: 50px;
+  border: 2px dashed rgba(239, 68, 68, 0.3);
+  border-radius: 100px;
+}
+
+.pipeline-dot {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #ef4444;
+  box-shadow: 0 0 10px #ef4444;
+  offset-path: path('M 25 25 C 25 -5, 95 -5, 95 25 C 95 55, 25 55, 25 25 Z');
+  animation: moveDot 4s infinite linear;
+}
+
+.pipeline-labels {
+  position: absolute;
+  bottom: 15px;
+  display: flex;
+  gap: 1rem;
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  color: #64748b;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+.pipeline-labels span {
+  animation: labelPulse 2s infinite alternate;
+}
+.pipeline-labels span:nth-child(2) { animation-delay: 0.6s; }
+.pipeline-labels span:nth-child(3) { animation-delay: 1.2s; }
+
+@keyframes moveDot {
+  0% { offset-distance: 0%; }
+  100% { offset-distance: 100%; }
+}
+
+@keyframes labelPulse {
+  0% { color: #64748b; }
+  100% { color: #f87171; }
+}
+
+/* 4. AI: Glowing Neural Grid */
+.ai-graphic {
+  background: linear-gradient(135deg, #091e3a 0%, #030a16 100%);
+}
+
+.neural-mesh {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.neural-svg {
+  width: 80px;
+  height: 80px;
+}
+
+.mesh-dot {
+  animation: dotBreathe 3s infinite ease-in-out alternate;
+}
+.mesh-dot.dot-1 { animation-delay: 0.5s; }
+.mesh-dot.dot-2 { animation-delay: 1s; }
+.mesh-dot.dot-3 { animation-delay: 1.5s; }
+.mesh-dot.dot-4 { animation-delay: 2s; }
+
+@keyframes dotBreathe {
+  0% { r: 3px; fill-opacity: 0.4; }
+  100% { r: 7px; fill-opacity: 1; filter: drop-shadow(0 0 5px rgba(96, 165, 250, 0.8)); }
+}
+
+/* 5. Cybersecurity: Glowing Shield & Scan Line */
+.security-graphic {
+  background: linear-gradient(135deg, #2a081e 0%, #0f020a 100%);
+}
+
+.security-shield {
+  color: #ec4899;
+  filter: drop-shadow(0 0 12px rgba(236, 72, 153, 0.6));
+  z-index: 2;
+  animation: float 4s infinite ease-in-out;
+}
+
+.radar-sweep {
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: conic-gradient(from 0deg, rgba(236, 72, 153, 0.15) 0deg, transparent 90deg, transparent 360deg);
+  animation: radarRotate 4s infinite linear;
+  z-index: 1;
+}
+
+@keyframes radarRotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* 6. IT Infra: Flashing Switch Ports */
+.infra-graphic {
+  background: linear-gradient(135deg, #0f172a 0%, #020617 100%);
+  flex-direction: column;
+}
+
+.infra-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.5rem;
+  background: #1e293b;
+  padding: 0.75rem;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  z-index: 2;
+}
+
+.infra-port {
+  width: 14px;
+  height: 14px;
+  border-radius: 3px;
+  background-color: #475569;
+  position: relative;
+}
+
+.infra-port::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+}
+
+.infra-port.status-green::after {
+  background-color: #22c55e;
+  box-shadow: 0 0 6px #22c55e;
+  animation: portFlash 1.2s infinite steps(2);
+}
+
+.infra-port.status-orange::after {
+  background-color: #f97316;
+  box-shadow: 0 0 6px #f97316;
+  animation: portFlash 0.8s infinite steps(2);
+}
+
+@keyframes portFlash {
+  0%, 100% { opacity: 0.2; }
+  50% { opacity: 1; }
+}
+
+/* 7. Managed IT: Pulsing Graph */
+.managed-graphic {
+  background: linear-gradient(135deg, #0b2545 0%, #020b14 100%);
+}
+
+.uptime-graph {
+  width: 70%;
+  height: auto;
+  opacity: 0.85;
+}
+
+.graph-svg path {
+  stroke-dasharray: 200;
+  stroke-dashoffset: 200;
+  animation: drawLine 4s infinite alternate ease-in-out;
+}
+
+.live-badge {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: rgba(37, 99, 235, 0.2);
+  border: 1px solid rgba(37, 99, 235, 0.4);
+  color: #60a5fa;
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  font-weight: 700;
+  padding: 0.15rem 0.4rem;
+  border-radius: 4px;
+  letter-spacing: 0.05em;
+  animation: beaconPulse 2s infinite;
+}
+
+@keyframes drawLine {
+  0% { stroke-dashoffset: 200; }
+  100% { stroke-dashoffset: 0; }
+}
+
+/* 8. Support: Helper Pulsing Rings */
+.support-graphic {
+  background: linear-gradient(135deg, #2e1065 0%, #0f0529 100%);
+}
+
+.support-beacon {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background-color: #a78bfa;
+  box-shadow: 0 0 15px #c084fc;
+  z-index: 3;
+}
+
+.support-ring {
+  position: absolute;
+  border: 2px solid rgba(167, 139, 250, 0.4);
+  border-radius: 50%;
+  z-index: 2;
+  animation: ringPulse 2.5s infinite linear;
+}
+
+.support-ring.ring-1 { width: 40px; height: 40px; }
+.support-ring.ring-2 { width: 80px; height: 80px; animation-delay: 1.25s; }
+
+.support-text {
+  position: absolute;
+  bottom: 15px;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: #c084fc;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  z-index: 4;
+}
+
+@keyframes ringPulse {
+  0% { transform: scale(0.5); opacity: 1; }
+  100% { transform: scale(1.5); opacity: 0; }
+}
+
+/* Directory Cards Custom Blur Orbs */
+.directory-card-blur-bg {
+  position: absolute;
+  top: -20px;
+  right: -20px;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  filter: blur(25px);
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.35;
+  transition: all 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.grad-blue .directory-card-blur-bg {
+  background: radial-gradient(circle, rgba(37,99,235,0.4) 0%, rgba(96,165,250,0.15) 40%, rgba(37,99,235,0) 70%);
+  animation: rotateOrb 10s linear infinite;
+}
+
+.grad-red .directory-card-blur-bg {
+  background: radial-gradient(circle, rgba(239,68,68,0.4) 0%, rgba(251,113,133,0.15) 40%, rgba(239,68,68,0) 70%);
+  animation: rotateOrb 12s linear infinite;
+}
+
+.grad-purple .directory-card-blur-bg {
+  background: radial-gradient(circle, rgba(139,92,246,0.4) 0%, rgba(192,132,252,0.15) 40%, rgba(139,92,246,0) 70%);
+  animation: rotateOrb 14s linear infinite;
+}
+
+@keyframes rotateOrb {
+  0% { transform: rotate(0deg) translate(0, 0) scale(1); }
+  50% { transform: rotate(180deg) translate(-20px, 10px) scale(1.2); }
+  100% { transform: rotate(360deg) translate(0, 0) scale(1); }
+}
+
+.directory-card-modern-grad:hover .directory-card-blur-bg {
+  transform: scale(1.4) translate(-40px, 30px);
+  filter: blur(20px);
+  opacity: 0.7;
+}
+
+/* Screenshot Lightbox Modal */
+.rennto-lightbox-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(15, 23, 42, 0.95);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 99999;
+  cursor: zoom-out;
+  animation: fadeIn 0.3s ease;
+}
+
+.rennto-lightbox-content {
+  position: relative;
+  max-width: 90%;
+  max-height: 90%;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5);
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: #000000;
+}
+
+.rennto-lightbox-img {
+  max-width: 100%;
+  max-height: 85vh;
+  display: block;
+  object-fit: contain;
+}
+
+.rennto-lightbox-close {
+  position: absolute;
+  top: 1rem;
+  right: 1.5rem;
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: white;
+  font-size: 2rem;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  z-index: 10;
+}
+
+.rennto-lightbox-close:hover {
+  background: #ef4444;
+  transform: scale(1.1);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Custom Background Colors for Hero Section Buttons */
+.hero-actions .cta-button {
+  background: #2563EB !important;
+  color: #ffffff !important;
+  border: none !important;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2) !important;
+}
+
+.hero-actions .cta-button:hover {
+  background: #1D4ED8 !important;
+  transform: translateY(-2px) !important;
+}
+
+.hero-actions .hero-btn-outline {
+  background: #1E293B !important;
+  color: #ffffff !important;
+  border: none !important;
+  box-shadow: 0 4px 12px rgba(30, 41, 59, 0.2) !important;
+}
+
+.hero-actions .hero-btn-outline:hover {
+  background: #0F172A !important;
+  transform: translateY(-2px) !important;
+}
+
+/* Center Get Started button smaller styling override */
+.hero-actions a:nth-child(3) {
+  background: #4F46E5 !important;
+  color: #ffffff !important;
+  height: 38px !important;
+  padding: 0 1.2rem !important;
+  font-size: 0.82rem !important;
+  box-shadow: 0 4px 10px rgba(79, 70, 229, 0.2) !important;
+}
+
+.hero-actions a:nth-child(3):hover {
+  background: #4338CA !important;
+  transform: translateY(-2px) !important;
+}
+
+/* Reduced size/black background Footer overrides */
+.footer-wrapper {
+  background: #000000 !important;
+  animation: none !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+  padding: 1.5rem 0 1rem 0 !important; /* Reduced more footer size */
+}
+
+.footer-logo-link {
+  background: #ffffff !important;
+  padding: 0.35rem 0.75rem !important;
+  border-radius: 6px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin-bottom: 0.5rem;
+}
+
+.footer-logo-img {
+  filter: none !important; /* Keep original blue/red colors of logo! */
+  height: 28px !important;
+  width: auto !important;
+}
+
+.footer-container {
+  gap: 1.25rem !important;
+  margin-bottom: 1.5rem !important;
+}
+
+/* Section Spacing Reductions */
+.unified-trust-section {
+  padding: 2rem 0 !important; /* Reduced spaces */
+}
+
+.services-section {
+  padding: 2rem 0 !important; /* Reduced spaces */
+}
+
+.products-platforms-section {
+  padding: 1.5rem 0 !important; /* Reduced spaces */
+}
+
+.directory-showcase-section {
+  padding: 2rem 0 !important; /* Reduced spaces */
+}
+
+.stay-ahead-newsletter-section {
+  padding: 2rem 0 !important; /* Reduced spaces */
+}
+
+.accelerate-banner-section {
+  padding: 1.5rem 0 !important; /* Reduced spaces */
+}
+
+/* Premium Colored Glass Showcase Directory Cards */
+.directory-card-modern-grad {
+  border-radius: 16px !important;
+  border: 1px solid rgba(255, 255, 255, 0.5) !important;
+  backdrop-filter: blur(25px) !important;
+  -webkit-backdrop-filter: blur(25px) !important;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.03) !important;
+  z-index: 2 !important;
+  position: relative !important;
+  overflow: hidden !important;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease, border-color 0.3s ease !important;
+  padding: 2rem 1.75rem !important;
+}
+
+.directory-card-modern-grad.grad-blue {
+  background: linear-gradient(180deg, rgba(244, 249, 255, 0.95) 0%, rgba(224, 238, 254, 0.7) 100%) !important;
+  border-top: 5px solid #3B82F6 !important;
+}
+.directory-card-modern-grad.grad-red {
+  background: linear-gradient(180deg, rgba(255, 252, 252, 0.95) 0%, rgba(255, 242, 242, 0.7) 100%) !important;
+  border-top: 5px solid #EF4444 !important;
+}
+.directory-card-modern-grad.grad-purple {
+  background: linear-gradient(180deg, rgba(254, 252, 255, 0.95) 0%, rgba(248, 242, 255, 0.7) 100%) !important;
+  border-top: 5px solid #8B5CF6 !important;
+}
+
+.directory-card-modern-grad:hover {
+  transform: translateY(-8px) !important;
+  box-shadow: 0 20px 40px rgba(15, 23, 42, 0.08) !important;
+  border-color: rgba(255, 255, 255, 0.8) !important;
+}
+
+.directory-card-modern-grad h3 {
+  color: #0F172A !important;
+  font-weight: 800 !important;
+  font-size: 1.35rem !important;
+  margin-top: 0.25rem !important;
+}
+
+.directory-icon-circle {
+  width: 48px !important;
+  height: 48px !important;
+  border-radius: 12px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06) !important;
+}
+
+.directory-list-modern li {
+  color: #334155 !important;
+  font-size: 0.92rem !important;
+  font-weight: 600 !important;
+  transition: transform 0.2s ease, color 0.2s ease !important;
+  cursor: pointer;
+}
+
+.directory-list-modern li:hover {
+  transform: translateX(6px) !important;
+  color: #000000 !important;
+}
+
+.directory-showcase-section {
+  background: #FAFAFA !important; /* Whitish background behind the 3 cards */
+}
+
+/* Gradient Hero Section Buttons matched with Contact Us button theme */
+.hero-actions a:nth-child(1),
+.hero-actions a:nth-child(2) {
+  background: rgba(15, 23, 42, 0.02) !important;
+  color: #0f172a !important;
+  border: 1px solid rgba(15, 23, 42, 0.15) !important;
+  box-shadow: none !important;
+  transition: all 0.25s cubic-bezier(0.25, 1, 0.5, 1) !important;
+}
+.hero-actions a:nth-child(1):hover,
+.hero-actions a:nth-child(2):hover,
+.hero-actions a:nth-child(1):active,
+.hero-actions a:nth-child(2):active {
+  background: var(--grad-primary) !important;
+  color: #ffffff !important;
+  border-color: transparent !important;
+  box-shadow: 0 5px 15px rgba(255, 30, 60, 0.35) !important;
+  transform: translateY(-2px) !important;
+}
+
+.hero-actions a:nth-child(3) {
+  background: rgba(15, 23, 42, 0.02) !important;
+  color: #0f172a !important;
+  border: 1px solid rgba(15, 23, 42, 0.15) !important;
+  box-shadow: none !important;
+  height: 36px !important;
+  padding: 0 1.2rem !important;
+  font-size: 0.82rem !important;
+  transition: all 0.25s cubic-bezier(0.25, 1, 0.5, 1) !important;
+}
+.hero-actions a:nth-child(3):hover,
+.hero-actions a:nth-child(3):active {
+  background: var(--grad-primary) !important;
+  color: #ffffff !important;
+  border-color: transparent !important;
+  box-shadow: 0 4px 12px rgba(255, 30, 60, 0.3) !important;
+  transform: translateY(-2px) !important;
+}
+
+.accelerate-container {
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 50%, #ffffff 100%) !important;
+  border: 1px solid rgba(15, 23, 42, 0.08) !important;
+  box-shadow: 0 15px 40px rgba(15, 23, 42, 0.03) !important;
+  position: relative !important;
+  overflow: hidden !important;
+  transition: all 0.3s ease !important;
+}
+
+.accelerate-container::before {
+  display: none !important; /* Remove dark shifting shimmer */
+}
+
+/* Very soft pastel animated floating shapes for the light banner */
+.accelerate-bg-shape-1 {
+  position: absolute !important;
+  width: 250px !important;
+  height: 250px !important;
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.06) 0%, transparent 70%) !important;
+  top: -50px !important;
+  left: 15% !important;
+  border-radius: 50% !important;
+  z-index: 0 !important;
+  pointer-events: none !important;
+}
+
+.accelerate-bg-shape-2 {
+  position: absolute !important;
+  width: 320px !important;
+  height: 320px !important;
+  background: radial-gradient(circle, rgba(139, 92, 246, 0.06) 0%, transparent 70%) !important;
+  bottom: -80px !important;
+  right: 10% !important;
+  border-radius: 50% !important;
+  z-index: 0 !important;
+  pointer-events: none !important;
+}
+
+.accelerate-left,
+.accelerate-right {
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+.accelerate-left h2 {
+  color: #0F172A !important;
+}
+
+.accelerate-sub {
+  color: #FF1E3C !important; /* Replaced blue with red/pink theme */
+}
+
+.accelerate-p {
+  color: #334155 !important;
+}
+
+.accelerate-right h3 {
+  color: #0F172A !important;
+}
+
+.partner-list-modern li {
+  color: #334155 !important;
+}
+
+.check-circle-blue {
+  background-color: #FF1E3C !important; /* Replace blue check circle with red */
+}
+
+.partner-detail-card h4 {
+  color: #0F172A !important;
+}
+
+.partner-detail-card p {
+  color: #475569 !important;
+}
+
+/* Outline action buttons matched with red theme */
+.accelerate-actions .acc-btn-outline,
+.accelerate-actions .acc-btn-solid {
+  border: 1px solid rgba(15, 23, 42, 0.15) !important;
+  color: #0F172A !important;
+  background: rgba(15, 23, 42, 0.02) !important;
+  transition: all 0.2s cubic-bezier(0.25, 1, 0.5, 1) !important;
+  box-shadow: none !important;
+}
+
+.accelerate-actions .acc-btn-outline:hover,
+.accelerate-actions .acc-btn-solid:hover {
+  background: rgba(15, 23, 42, 0.06) !important;
+  color: #0F172A !important;
+  border-color: rgba(15, 23, 42, 0.3) !important;
+  transform: translateY(-1px) !important;
+}
+
+.accelerate-actions .acc-btn-outline:active,
+.accelerate-actions .acc-btn-solid:active {
+  background: rgba(15, 23, 42, 0.12) !important; /* Subtle gray color on click */
+  color: #0F172A !important;
+  border-color: rgba(15, 23, 42, 0.4) !important;
+  transform: translateY(1px) !important;
+}
+
+/* Reduced size/black background Footer overrides with animations */
+.footer-wrapper {
+  background: linear-gradient(270deg, #020617, #0f172a, #020617) !important;
+  background-size: 400% 400% !important;
+  animation: footerGlow 10s ease infinite !important;
+  border-top: 2px solid transparent !important;
+  border-image: linear-gradient(to right, #3B82F6, #8B5CF6, #EC4899) 1 !important; /* Beautiful glowing neon border */
+  padding: 1.25rem 0 0.75rem 0 !important; /* Reduced footer height */
+}
+
+@keyframes footerGlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.footer-container {
+  gap: 1rem !important;
+  margin-bottom: 1rem !important;
+}
+
+.footer-brand-col {
+  margin-right: 3rem !important; /* Extra spacing before company column */
+}
+
+.footer-logo-link {
+  background: #ffffff !important;
+  padding: 0.2rem 0.5rem !important; /* Tight wrapper only till text */
+  border-radius: 4px !important;
+  display: inline-flex !important;
+  width: fit-content !important;
+  max-width: max-content !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin-bottom: 0.3rem !important;
+}
+
+.footer-logo-img {
+  filter: none !important; /* Keep original blue/red colors of logo! */
+  height: 48px !important; /* Logo made significantly larger so text is clearly visible */
+  width: auto !important;
+}
+
+.footer-brand-desc {
+  font-size: 0.88rem !important;
+  line-height: 1.4 !important;
+}
+
+.footer-links-col h3 {
+  font-size: 1.05rem !important;
+  margin-bottom: 0.5rem !important;
+}
+
+.footer-links-list a {
+  font-size: 0.9rem !important;
+}
+
+.footer-contact-list {
+  font-size: 0.9rem !important;
+}
+
+.footer-bottom {
+  padding-top: 0.75rem !important;
+  margin-top: 0.75rem !important;
+}
+
+.footer-copyright,
+.footer-legal-links a {
+  font-size: 0.9rem !important;
+}
+
+/* Global Section Spacing Reductions */
+.unified-trust-section,
+.services-section,
+.products-platforms-section,
+.directory-showcase-section,
+.stay-ahead-newsletter-section,
+.accelerate-banner-section {
+  padding-top: 1.25rem !important;
+  padding-bottom: 1.25rem !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+/* Stay Ahead Newsletter Section Layout & GSAP Orbs */
+.stay-ahead-newsletter-section {
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+/* Prominent, darker parallax background elements for newsletter section */
+.newsletter-bg-orb-1 {
+  position: absolute !important;
+  width: 320px !important;
+  height: 320px !important;
+  background: radial-gradient(circle, rgba(15, 23, 42, 0.12) 0%, rgba(99, 102, 241, 0.08) 50%, transparent 70%) !important;
+  top: -50px !important;
+  left: 8% !important;
+  border-radius: 50% !important;
+  z-index: 0 !important;
+  pointer-events: none !important;
+}
+
+.newsletter-bg-orb-2 {
+  position: absolute !important;
+  width: 420px !important;
+  height: 420px !important;
+  background: radial-gradient(circle, rgba(37, 99, 235, 0.08) 0%, rgba(139, 92, 246, 0.06) 50%, transparent 70%) !important;
+  bottom: -120px !important;
+  right: 12% !important;
+  border-radius: 50% !important;
+  z-index: 0 !important;
+  pointer-events: none !important;
+}
+
+.stay-ahead-container {
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+/* Small, Nice & Charcoal-Zinc Trust & Compliance Container with High-Visibility Glow */
+.unified-trust-card {
+  padding: 1.25rem 1.75rem !important; /* Compact padding */
+  border-radius: 12px !important;
+  background: linear-gradient(135deg, #0d0d12 0%, #F9FAFB 30%, #F9FAFB 70%, #0d0d12 100%) !important;
+  background-size: 200% 200% !important;
+  border: 1px solid rgba(15, 23, 42, 0.08) !important;
+  box-shadow: 0 15px 35px rgba(15, 23, 42, 0.05) !important;
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+/* Vivid animated glow floating sweep inside trust card using soft light colors */
+.unified-trust-card::before {
+  content: "" !important;
+  position: absolute !important;
+  top: -30% !important;
+  left: -30% !important;
+  width: 160% !important;
+  height: 160% !important;
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.1) 0%, rgba(139, 92, 246, 0.05) 30%, transparent 65%) !important;
+  animation: moveTrustGlow 6s ease-in-out infinite alternate !important;
+  z-index: 1 !important;
+  pointer-events: none !important;
+}
+
+@keyframes moveTrustGlow {
+  0% { transform: translate(-5%, -5%) rotate(0deg); }
+  100% { transform: translate(10%, 10%) rotate(45deg); }
+}
+
+.trust-header,
+.certifications-grid-modern,
+.trust-split-row {
+  position: relative !important;
+  z-index: 2 !important; /* Make content sit above the background glow animations */
+}
+
+.trust-header {
+  margin: 0 auto 1.25rem auto !important; /* Reduced margin */
+}
+
+.trust-title {
+  font-size: 1.6rem !important;
+  margin-top: 0.5rem !important;
+  margin-bottom: 0.5rem !important;
+  color: #0F172A !important;
+}
+
+.trust-desc {
+  font-size: 0.85rem !important;
+  line-height: 1.4 !important;
+  margin-bottom: 0.5rem !important;
+  color: #475569 !important;
+}
+
+.trust-subsection-title {
+  margin-top: 1rem !important;
+  margin-bottom: 0.75rem !important;
+  font-size: 0.88rem !important;
+  color: #334155 !important;
+}
+
+.trust-split-row {
+  margin-top: 1.5rem !important;
+  gap: 1.5rem !important;
+}
+
+/* Compliance Grid cards remain white with visible text color */
+.certifications-grid-modern {
+  display: grid !important;
+  grid-template-columns: repeat(9, 1fr) !important;
+  gap: 0.35rem !important;
+}
+
+.cert-card-modern {
+  padding: 0.4rem !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  text-align: center !important;
+  border-radius: 8px !important;
+  background: #ffffff !important; /* Kept white background */
+  border: 1px solid rgba(15, 23, 42, 0.08) !important;
+  box-shadow: 0 4px 10px rgba(15, 23, 42, 0.02) !important;
+  min-height: auto !important;
+}
+
+.cert-card-modern .compliance-icon {
+  width: 18px !important;
+  height: 18px !important;
+  margin-bottom: 0.2rem !important;
+  margin-right: 0px !important;
+  stroke: #475569 !important;
+}
+
+.cert-card-info h3 {
+  font-size: 0.72rem !important;
+  font-weight: 700 !important;
+  margin: 0 !important;
+  color: #0F172A !important; /* Visible text colour */
+}
+
+.cert-card-info p {
+  display: none !important; /* Make it look super clean and nice */
+}
+
+/* Compact Brand Logo Row styling */
+.client-logo-card {
+  background: #ffffff !important;
+  border: 1px solid rgba(15, 23, 42, 0.08) !important;
+  padding: 0.5rem 1.25rem !important;
+  height: 52px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border-radius: 8px !important;
+  width: auto !important;
+}
+
+/* Blending 100 Transcripts dark blue logo perfectly */
+.client-logo-card.card-l-1 {
+  background: #1e3557 !important;
+  border: none !important;
+}
+
+.client-logo-card.card-l-2 {
+  background: #ffffff !important;
+  gap: 0.5rem !important;
+}
+
+.chataway-logo {
+  height: 32px !important; /* Made larger */
+  width: auto !important;
+}
+
+.client-logo-text {
+  font-family: var(--font-display) !important;
+  font-weight: 700 !important;
+  font-size: 1.05rem !important;
+  color: #0F172A !important;
+}
+
+.client-logo-img {
+  max-height: 100% !important;
+  max-width: 140px !important;
+  object-fit: contain !important;
+}
+
+/* Curved outline wrapper for Rennto & TX-Hub Logos */
+.product-item-logo-wrapper {
+  width: 76px !important; /* Increased from 56px to make logo significantly bigger */
+  height: 76px !important; /* Increased from 56px */
+  border-radius: 16px !important;
+  border: 2px solid rgba(255, 255, 255, 0.15) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background: #ffffff !important;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15) !important;
+  padding: 3px !important; /* Minimal padding so logo fills up the space */
+  overflow: hidden !important;
+}
+
+.product-item-logo-wrapper img {
+  width: 100% !important;
+  height: 100% !important;
+  max-width: 100% !important;
+  max-height: 100% !important;
+  object-fit: contain !important; /* Ensure logo shape is preserved but fills space */
+  border-radius: 12px !important;
+}
+
+/* Fitting Screenshots inside portrait Phone mockups to eliminate white space */
+.rennto-screenshot-viewer {
+  width: 180px !important;
+  max-width: 100% !important;
+  aspect-ratio: 9 / 16 !important;
+  height: auto !important;
+  margin: 0 auto !important;
+  background: #000000 !important;
+  border: 7px solid #1e293b !important;
+  border-radius: 24px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 0 !important;
+  position: relative !important;
+  overflow: hidden !important;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15) !important;
+}
+
+.rennto-active-screen {
+  width: 100% !important;
+  height: 100% !important;
+  max-width: 100% !important;
+  max-height: 100% !important;
+  object-fit: contain !important; /* Changed to contain to prevent overlapping/cropping of mobile screens */
+  background: #000000 !important;
+  cursor: zoom-in !important;
+  transition: transform 0.3s ease !important;
+}
+
+.rennto-active-screen:hover {
+  transform: scale(1.04) !important;
+}
+
+/* Landscape Browser/Website Mockup for TX-Hub */
+.txhub-screenshot-viewer {
+  width: 100% !important;
+  max-width: 330px !important;
+  aspect-ratio: 1.6 / 1 !important; /* Forces correct landscape aspect ratio */
+  height: auto !important; /* Scale height dynamically with width */
+  margin: 0 auto !important;
+  background: #0d1527 !important;
+  border: 6px solid #1e293b !important;
+  border-top: 18px solid #1e293b !important; /* Scaled browser top bar bezel */
+  border-radius: 12px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 0 !important;
+  position: relative !important;
+  overflow: hidden !important;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35) !important;
+}
+
+/* Window dots on browser top bar */
+.txhub-screenshot-viewer::before {
+  content: '' !important;
+  position: absolute !important;
+  top: -13px !important; /* Proportional offset for 18px top border */
+  left: 10px !important;
+  width: 5px !important;
+  height: 5px !important;
+  border-radius: 50% !important;
+  background: #ef4444 !important;
+  box-shadow: 10px 0 0 #f59e0b, 20px 0 0 #10b981 !important;
+  z-index: 10 !important;
+}
+
+.txhub-active-screen {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  cursor: zoom-in !important;
+  transition: transform 0.3s ease !important;
+}
+
+.txhub-active-screen:hover {
+  transform: scale(1.04) !important;
+}
+
+/* Mobile responsive stack layout for products grid and viewers */
+@media (max-width: 768px) {
+  .unified-card-right-grid {
+    grid-template-columns: 1fr !important;
+    gap: 2rem !important;
+  }
+  .txhub-screenshot-viewer {
+    max-width: 100% !important;
+  }
+}
+
+/* Specific alignments for Key Services Images to fit properly */
+.services-grid .service-card:nth-child(1) .service-card-img {
+  object-fit: contain !important; /* Fit the diagram text fully */
+  background-color: #000000 !important; /* Match image black background */
+  padding: 0px !important; /* Remove borders */
+}
+
+.services-grid .service-card:nth-child(2) .service-card-img {
+  object-position: right center !important; /* Align Cloud image to show the cloud nicely */
+}
+
+.services-grid .service-card:nth-child(3) .service-card-img {
+  object-fit: contain !important; /* Fit the diagram text fully now that empty bottom space is cropped */
+  background-color: #000000 !important; /* Match image black background */
+  padding: 0px !important; /* Remove borders */
+}
+
+
+/* Stylish, Curved Overlays for Key Service Images */
+.service-card-image-wrapper {
+  height: 190px !important;
+  position: relative !important;
+  overflow: hidden !important;
+  border-radius: 18px !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  background: rgba(255, 255, 255, 0.03) !important;
+  box-shadow: 
+    inset 0 1px 1px rgba(255, 255, 255, 0.15),
+    0 8px 25px rgba(0, 0, 0, 0.3) !important;
+  margin-bottom: 1.4rem !important;
+  transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1) !important;
+}
+
+/* Glass glare sweep effect */
+.service-card-image-wrapper::after {
+  content: '' !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: -150% !important;
+  width: 120% !important;
+  height: 100% !important;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.18),
+    transparent
+  ) !important;
+  transform: skewX(-25deg) !important;
+  transition: all 0.8s ease !important;
+  z-index: 2 !important;
+}
+
+.service-card:hover .service-card-image-wrapper::after {
+  left: 150% !important;
+}
+
+/* Specific glows for different card themes on hover */
+.service-card:hover .service-card-image-wrapper.red-glow-border {
+  border-color: rgba(255, 30, 60, 0.45) !important;
+  box-shadow: 
+    0 15px 35px rgba(255, 30, 60, 0.25),
+    0 0 15px rgba(255, 30, 60, 0.15) !important;
+  transform: translateY(-6px) scale(1.02) !important;
+}
+
+.service-card:hover .service-card-image-wrapper.blue-glow-border {
+  border-color: rgba(59, 130, 246, 0.45) !important;
+  box-shadow: 
+    0 15px 35px rgba(59, 130, 246, 0.25),
+    0 0 15px rgba(59, 130, 246, 0.15) !important;
+  transform: translateY(-6px) scale(1.02) !important;
+}
+
+.service-card:hover .service-card-image-wrapper.purple-glow-border {
+  border-color: rgba(124, 58, 237, 0.45) !important;
+  box-shadow: 
+    0 15px 35px rgba(124, 58, 237, 0.25),
+    0 0 15px rgba(124, 58, 237, 0.15) !important;
+  transform: translateY(-6px) scale(1.02) !important;
+}
+
+.service-card-img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  filter: brightness(0.9) contrast(1.05) !important;
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), filter 0.5s ease !important;
+}
+
+.service-card:hover .service-card-img {
+  transform: scale(1.08) rotate(1deg) !important;
+  filter: brightness(1.05) contrast(1.1) !important;
+}
+
+/* Homepage Hero Animation Video Styles */
+.hero-animation-video {
+  width: 100% !important;
+  max-width: 680px !important;
+  height: auto !important;
+  border-radius: 24px !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.22) !important;
+  box-shadow: 
+    0 25px 60px rgba(0, 0, 0, 0.55),
+    0 0 35px rgba(59, 130, 246, 0.35),
+    0 0 55px rgba(255, 30, 60, 0.22) !important;
+  backdrop-filter: blur(10px) !important;
+  animation: videoFloat 6s ease-in-out infinite !important;
+}
+
+@keyframes videoFloat {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-12px) rotate(0.5deg);
+  }
+}
