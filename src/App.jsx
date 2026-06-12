@@ -51,32 +51,78 @@ import animationHomeVideo from './assets/annimationhome.mp4';
 import aiAnimationVideo from './assets/AIannimation.mp4';
 
 // Helper Icons for Certifications & Compliance
-const CertIcon = () => (
-  <svg className="compliance-icon" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#475569" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-    <circle cx="12" cy="12" r="10"/>
-    <path d="m9 12 2 2 4-4"/>
-  </svg>
-);
-
-const ShieldIcon = () => (
-  <svg className="compliance-icon" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#475569" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+const Iso9001Icon = () => (
+  <svg className="compliance-icon" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
     <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-    <path d="m9 12 2 2 4-4"/>
+    <circle cx="12" cy="11" r="3"/>
+    <path d="m9 11 2 2 4-4"/>
   </svg>
 );
 
-const CardIcon = () => (
-  <svg className="compliance-icon" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#475569" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-    <rect x="2" y="5" width="20" height="14" rx="2" ry="2"/>
-    <line x1="2" y1="10" x2="22" y2="10"/>
-    <path d="m9 14 2 2 4-4"/>
+const Iso27001Icon = () => (
+  <svg className="compliance-icon" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+    <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+    <path d="M12 15v3"/>
+  </svg>
+);
+
+const Soc2Icon = () => (
+  <svg className="compliance-icon" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+    <line x1="12" y1="8" x2="12" y2="16"/>
+    <line x1="8" y1="12" x2="16" y2="12"/>
+  </svg>
+);
+
+const Iso20000Icon = () => (
+  <svg className="compliance-icon" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+    <rect x="2" y="3" width="20" height="5" rx="1"/>
+    <rect x="2" y="11" width="20" height="5" rx="1"/>
+    <rect x="2" y="19" width="20" height="5" rx="1"/>
+    <circle cx="6" cy="5.5" r="1"/>
+    <circle cx="6" cy="13.5" r="1"/>
+    <circle cx="6" cy="21.5" r="1"/>
+  </svg>
+);
+
+const Iso22301Icon = () => (
+  <svg className="compliance-icon" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/>
+  </svg>
+);
+
+const PciIcon = () => (
+  <svg className="compliance-icon" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+    <rect x="1" y="4" width="22" height="16" rx="2" ry="2"/>
+    <line x1="1" y1="10" x2="23" y2="10"/>
+    <circle cx="6" cy="15" r="1.5"/>
+    <circle cx="11" cy="15" r="1.5"/>
+    <circle cx="16" cy="15" r="1.5"/>
   </svg>
 );
 
 const GdprIcon = () => (
-  <svg className="compliance-icon" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#475569" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+  <svg className="compliance-icon" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+    <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+    <circle cx="12" cy="16" r="1.5"/>
+  </svg>
+);
+
+const Iso27701Icon = () => (
+  <svg className="compliance-icon" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
     <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-    <circle cx="12" cy="12" r="3"/>
+    <path d="M12 11a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z"/>
+    <path d="M6 18c0-2.5 3-4.5 6-4.5s6 2 6 4.5"/>
+  </svg>
+);
+
+const Iso42001Icon = () => (
+  <svg className="compliance-icon" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+    <circle cx="12" cy="12" r="10"/>
+    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+    <path d="M2 12h20"/>
   </svg>
 );
 
@@ -89,7 +135,77 @@ function App() {
   const [txhubActiveIndex, setTxhubActiveIndex] = useState(0);
   const txhubScreens = [txhub1, txhub2, txhub3, txhub4];
 
+  const scrollXRef = useRef(0);
+  const isPausedRef = useRef(false);
+  const animationFrameIdRef = useRef(null);
   const illustrationRef = useRef(null);
+
+  // JavaScript requestAnimationFrame loop for continuous services scroll
+  useEffect(() => {
+    // Only run scroll animation on home page (#home) where the carousel resides
+    if (currentHash !== '#home') return;
+
+    const track = document.querySelector('.services-carousel-track');
+    if (!track) return;
+
+    const animate = () => {
+      if (!isPausedRef.current) {
+        scrollXRef.current -= 0.6; // Speed offset increment per frame
+        if (scrollXRef.current <= -1920) {
+          scrollXRef.current = 0;
+        }
+        track.style.transform = `translateX(${scrollXRef.current}px)`;
+      }
+      animationFrameIdRef.current = requestAnimationFrame(animate);
+    };
+
+    animationFrameIdRef.current = requestAnimationFrame(animate);
+
+    return () => {
+      if (animationFrameIdRef.current) {
+        cancelAnimationFrame(animationFrameIdRef.current);
+      }
+    };
+  }, [currentHash]);
+
+  const buttonPauseRef = useRef(false);
+  const buttonTimeoutRef = useRef(null);
+
+  const handleServicesScroll = (direction) => {
+    const track = document.querySelector('.services-carousel-track');
+    if (!track) return;
+    
+    // Pause animation during slide transition
+    isPausedRef.current = true;
+    buttonPauseRef.current = true;
+
+    if (buttonTimeoutRef.current) {
+      clearTimeout(buttonTimeoutRef.current);
+    }
+    
+    const step = 240; // width of card (220px) + gap (20px)
+    let newX = direction === 'next' ? scrollXRef.current - step : scrollXRef.current + step;
+    
+    // Boundary wrap-around
+    if (newX < -1920) {
+      newX = newX + 1920;
+    } else if (newX > 0) {
+      newX = newX - 1920;
+    }
+    
+    // Slide transition
+    track.style.transition = 'transform 0.5s cubic-bezier(0.25, 1, 0.5, 1)';
+    track.style.transform = `translateX(${newX}px)`;
+    scrollXRef.current = newX;
+    
+    // Clear transition and resume frame-loop
+    buttonTimeoutRef.current = setTimeout(() => {
+      track.style.transition = 'none';
+      buttonPauseRef.current = false;
+      isPausedRef.current = false;
+    }, 500);
+  };
+
 
   useEffect(() => {
     if (currentHash !== '#home') return;
@@ -280,7 +396,7 @@ function App() {
       if (particle) {
         gsap.set(particle, {
           attr: {
-            cx: 220,
+            cx: 240,
             cy: 15
           }
         });
@@ -447,6 +563,10 @@ function App() {
       case '#portfolio':
         return <Portfolio />;
       case '#collaboration':
+      case '#collab-tech':
+      case '#collab-business':
+      case '#collab-strategic':
+      case '#collab-join':
         return <Collaboration />;
       case '#menu':
         return <Menu />;
@@ -575,77 +695,77 @@ function App() {
                     <div className="certifications-marquee-track">
                       {/* Original Set */}
                       <div className="cert-marquee-pill">
-                        <span className="cert-pill-check">✓</span>
+                        <Iso9001Icon />
                         <span className="cert-pill-text">ISO 9001:2015</span>
                       </div>
                       <div className="cert-marquee-pill">
-                        <span className="cert-pill-check">✓</span>
+                        <Iso27001Icon />
                         <span className="cert-pill-text">ISO 27001</span>
                       </div>
                       <div className="cert-marquee-pill">
-                        <span className="cert-pill-check">✓</span>
+                        <Soc2Icon />
                         <span className="cert-pill-text">SOC 2 Type II</span>
                       </div>
                       <div className="cert-marquee-pill">
-                        <span className="cert-pill-check">✓</span>
+                        <Iso20000Icon />
                         <span className="cert-pill-text">ISO 20000-1</span>
                       </div>
                       <div className="cert-marquee-pill">
-                        <span className="cert-pill-check">✓</span>
+                        <Iso22301Icon />
                         <span className="cert-pill-text">ISO 22301</span>
                       </div>
                       <div className="cert-marquee-pill">
-                        <span className="cert-pill-check">✓</span>
+                        <PciIcon />
                         <span className="cert-pill-text">PCI DSS</span>
                       </div>
                       <div className="cert-marquee-pill">
-                        <span className="cert-pill-check">✓</span>
+                        <GdprIcon />
                         <span className="cert-pill-text">GDPR Compliance</span>
                       </div>
                       <div className="cert-marquee-pill">
-                        <span className="cert-pill-check">✓</span>
+                        <Iso27701Icon />
                         <span className="cert-pill-text">ISO 27701</span>
                       </div>
                       <div className="cert-marquee-pill">
-                        <span className="cert-pill-check">✓</span>
+                        <Iso42001Icon />
                         <span className="cert-pill-text">ISO 42001</span>
                       </div>
 
                       {/* Duplicate Set for Loop */}
                       <div className="cert-marquee-pill">
-                        <span className="cert-pill-check">✓</span>
+                        <Iso9001Icon />
                         <span className="cert-pill-text">ISO 9001:2015</span>
                       </div>
                       <div className="cert-marquee-pill">
-                        <span className="cert-pill-check">✓</span>
+                        <Iso27001Icon />
                         <span className="cert-pill-text">ISO 27001</span>
                       </div>
                       <div className="cert-marquee-pill">
-                        <span className="cert-pill-check">✓</span>
+                        <Soc2Icon />
                         <span className="cert-pill-text">SOC 2 Type II</span>
                       </div>
                       <div className="cert-marquee-pill">
-                        <span className="cert-pill-check">✓</span>
+                        <Iso20000Icon />
                         <span className="cert-pill-text">ISO 20000-1</span>
                       </div>
                       <div className="cert-marquee-pill">
-                        <span className="cert-pill-check">✓</span>
+                        <Iso22301Icon />
                         <span className="cert-pill-text">ISO 22301</span>
                       </div>
                       <div className="cert-marquee-pill">
-                        <span className="cert-pill-check">✓</span>
+                        <PciIcon />
                         <span className="cert-pill-text">PCI DSS</span>
                       </div>
                       <div className="cert-marquee-pill">
-                        <span className="cert-pill-check">✓</span>
+                        <GdprIcon />
                         <span className="cert-pill-text">GDPR Compliance</span>
                       </div>
                       <div className="cert-marquee-pill">
-                        <span className="cert-pill-check">✓</span>
+                        <Iso27701Icon />
                         <span className="cert-pill-text">ISO 27701</span>
                       </div>
                       <div className="cert-marquee-pill">
-                        <span className="cert-pill-check">✓</span>
+                        <Iso42001Icon />
                         <span className="cert-pill-text">ISO 42001</span>
                       </div>
                     </div>
@@ -713,117 +833,272 @@ function App() {
                   <h2 className="section-title">Our Key Services</h2>
                   <p className="section-desc">We deliver end-to-end digital transformation through specialized technology capabilities tailored to your business goals.</p>
                 </div>
-                <div className="services-grid">
-                  {/* Card 1: Software Development */}
-                  <div className="service-card service-card-blue">
-                    <div className="service-card-image-wrapper blue-glow-border">
-                      <img src={softwareDevImg} alt="Software Development Services" className="service-card-img" />
-                    </div>
-                    <div className="service-card-content">
-                      <div className="service-icon-box blue-glow">
-                        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+                <div className="services-carousel-container">
+                  <div className="services-carousel-track">
+                    {/* --- Group 1 --- */}
+                    {/* Card 1: Software Development */}
+                    <div className="service-card service-card-blue">
+                      <div className="service-card-image-wrapper">
+                        <img src={softwareDevImg} alt="Software Development Services" className="service-card-img" />
                       </div>
-                      <h3>Software Development Services</h3>
-                      <p>Custom software engineering, legacy modernization, enterprise web apps, and API integrations.</p>
+                      <div className="service-card-hover-bg" style={{ backgroundImage: `url(${softwareDevImg})` }}></div>
+                      <div className="service-card-overlay"></div>
+                      <div className="service-card-content">
+                        <div className="service-icon-box blue-glow">
+                          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+                        </div>
+                        <h3>Software Development</h3>
+                        <p>Custom software engineering, legacy modernization, enterprise web apps, and API integrations.</p>
+                      </div>
                     </div>
+   
+                    {/* Card 2: Cloud Services */}
+                    <div className="service-card service-card-purple">
+                      <div className="service-card-image-wrapper">
+                        <img src={cloudServicesImg} alt="Cloud Services" className="service-card-img" />
+                      </div>
+                      <div className="service-card-hover-bg" style={{ backgroundImage: `url(${cloudServicesImg})` }}></div>
+                      <div className="service-card-overlay"></div>
+                      <div className="service-card-content">
+                        <div className="service-icon-box purple-glow">
+                          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg>
+                        </div>
+                        <h3>Cloud Services</h3>
+                        <p>Public, private, and hybrid cloud migration, serverless computing, architectures, and operations.</p>
+                      </div>
+                    </div>
+   
+                    {/* Card 3: DevOps & Automation */}
+                    <div className="service-card service-card-red">
+                      <div className="service-card-image-wrapper">
+                        <img src={devopsAutomationImg} alt="DevOps & Automation" className="service-card-img" />
+                      </div>
+                      <div className="service-card-hover-bg" style={{ backgroundImage: `url(${devopsAutomationImg})` }}></div>
+                      <div className="service-card-overlay"></div>
+                      <div className="service-card-content">
+                        <div className="service-icon-box red-glow">
+                          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 12c-2-2.67-4-4-6-4a4 4 0 1 0 0 8c2 0 4-1.33 6-4zm0 0c2 2.67 4 4 6 4a4 4 0 1 0 0-8c-2 0-4 1.33-6 4z"/></svg>
+                        </div>
+                        <h3>DevOps & Automation</h3>
+                        <p>CI/CD pipelines, Infrastructure as Code, Kubernetes orchestration, and continuous monitoring.</p>
+                      </div>
+                    </div>
+   
+                    {/* Card 4: AI & Intelligent Automation */}
+                    <div className="service-card service-card-blue">
+                      <div className="service-card-image-wrapper">
+                        <img src={aiAutomationImg} alt="AI & Intelligent Automation" className="service-card-img" />
+                      </div>
+                      <div className="service-card-hover-bg" style={{ backgroundImage: `url(${aiAutomationImg})` }}></div>
+                      <div className="service-card-overlay"></div>
+                      <div className="service-card-content">
+                        <div className="service-icon-box blue-glow">
+                          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2"><path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96-.44 2.5 2.5 0 0 1 0-3.12 3 3 0 0 1 0-4.88 2.5 2.5 0 0 1 0-3.12A2.5 2.5 0 0 1 9.5 2zM14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96-.44 2.5 2.5 0 0 0 0-3.12 3 3 0 0 0 0-4.88 2.5 2.5 0 0 0 0-3.12A2.5 2.5 0 0 0 14.5 2z"/></svg>
+                        </div>
+                        <h3>AI & Automation</h3>
+                        <p>Machine learning workflows, natural language processing, predictive modeling, and intelligent agents.</p>
+                      </div>
+                    </div>
+   
+                    {/* Card 5: Cybersecurity Services */}
+                    <div className="service-card service-card-purple">
+                      <div className="service-card-image-wrapper">
+                        <img src={cybersecurityImg} alt="Cybersecurity Services" className="service-card-img" />
+                      </div>
+                      <div className="service-card-hover-bg" style={{ backgroundImage: `url(${cybersecurityImg})` }}></div>
+                      <div className="service-card-overlay"></div>
+                      <div className="service-card-content">
+                        <div className="service-icon-box purple-glow">
+                          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                        </div>
+                        <h3>Cybersecurity</h3>
+                        <p>Threat detection, vulnerability assessments, compliance alignment, and zero-trust framework execution.</p>
+                      </div>
+                    </div>
+   
+                    {/* Card 6: IT Infrastructure Services */}
+                    <div className="service-card service-card-red">
+                      <div className="service-card-image-wrapper">
+                        <img src={itInfrastructureImg} alt="IT Infrastructure Services" className="service-card-img" />
+                      </div>
+                      <div className="service-card-hover-bg" style={{ backgroundImage: `url(${itInfrastructureImg})` }}></div>
+                      <div className="service-card-overlay"></div>
+                      <div className="service-card-content">
+                        <div className="service-icon-box red-glow">
+                          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"/><rect x="2" y="14" width="20" height="8" rx="2" ry="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>
+                        </div>
+                        <h3>IT Infrastructure</h3>
+                        <p>Network engineering, modern datacenter design, virtualization, and hybrid work setups.</p>
+                      </div>
+                    </div>
+   
+                    {/* Card 7: Managed IT Services */}
+                    <div className="service-card service-card-blue">
+                      <div className="service-card-image-wrapper">
+                        <img src={managedItImg} alt="Managed IT Services" className="service-card-img" />
+                      </div>
+                      <div className="service-card-hover-bg" style={{ backgroundImage: `url(${managedItImg})` }}></div>
+                      <div className="service-card-overlay"></div>
+                      <div className="service-card-content">
+                        <div className="service-icon-box blue-glow">
+                          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+                        </div>
+                        <h3>Managed IT Services</h3>
+                        <p>24/7 helpdesk monitoring, asset governance, backup systems, and routine infrastructure health updates.</p>
+                      </div>
+                    </div>
+   
+                    {/* Card 8: Support & Maintenance */}
+                    <div className="service-card service-card-purple">
+                      <div className="service-card-image-wrapper">
+                        <img src={supportMaintenanceImg} alt="Support & Maintenance" className="service-card-img" />
+                      </div>
+                      <div className="service-card-hover-bg" style={{ backgroundImage: `url(${supportMaintenanceImg})` }}></div>
+                      <div className="service-card-overlay"></div>
+                      <div className="service-card-content">
+                        <div className="service-icon-box purple-glow">
+                          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+                        </div>
+                        <h3>Support & Maintenance</h3>
+                        <p>SLA-backed systems troubleshooting, emergency hotfixes, package updates, and routine checks.</p>
+                      </div>
+                    </div>
+
+                    {/* --- Group 2 (Duplicate for loop) --- */}
+                    {/* Card 1: Software Development */}
+                    <div className="service-card service-card-blue">
+                      <div className="service-card-image-wrapper">
+                        <img src={softwareDevImg} alt="Software Development Services" className="service-card-img" />
+                      </div>
+                      <div className="service-card-hover-bg" style={{ backgroundImage: `url(${softwareDevImg})` }}></div>
+                      <div className="service-card-overlay"></div>
+                      <div className="service-card-content">
+                        <div className="service-icon-box blue-glow">
+                          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+                        </div>
+                        <h3>Software Development</h3>
+                        <p>Custom software engineering, legacy modernization, enterprise web apps, and API integrations.</p>
+                      </div>
+                    </div>
+   
+                    {/* Card 2: Cloud Services */}
+                    <div className="service-card service-card-purple">
+                      <div className="service-card-image-wrapper">
+                        <img src={cloudServicesImg} alt="Cloud Services" className="service-card-img" />
+                      </div>
+                      <div className="service-card-hover-bg" style={{ backgroundImage: `url(${cloudServicesImg})` }}></div>
+                      <div className="service-card-overlay"></div>
+                      <div className="service-card-content">
+                        <div className="service-icon-box purple-glow">
+                          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg>
+                        </div>
+                        <h3>Cloud Services</h3>
+                        <p>Public, private, and hybrid cloud migration, serverless computing, architectures, and operations.</p>
+                      </div>
+                    </div>
+   
+                    {/* Card 3: DevOps & Automation */}
+                    <div className="service-card service-card-red">
+                      <div className="service-card-image-wrapper">
+                        <img src={devopsAutomationImg} alt="DevOps & Automation" className="service-card-img" />
+                      </div>
+                      <div className="service-card-hover-bg" style={{ backgroundImage: `url(${devopsAutomationImg})` }}></div>
+                      <div className="service-card-overlay"></div>
+                      <div className="service-card-content">
+                        <div className="service-icon-box red-glow">
+                          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 12c-2-2.67-4-4-6-4a4 4 0 1 0 0 8c2 0 4-1.33 6-4zm0 0c2 2.67 4 4 6 4a4 4 0 1 0 0-8c-2 0-4 1.33-6 4z"/></svg>
+                        </div>
+                        <h3>DevOps & Automation</h3>
+                        <p>CI/CD pipelines, Infrastructure as Code, Kubernetes orchestration, and continuous monitoring.</p>
+                      </div>
+                    </div>
+   
+                    {/* Card 4: AI & Intelligent Automation */}
+                    <div className="service-card service-card-blue">
+                      <div className="service-card-image-wrapper">
+                        <img src={aiAutomationImg} alt="AI & Intelligent Automation" className="service-card-img" />
+                      </div>
+                      <div className="service-card-hover-bg" style={{ backgroundImage: `url(${aiAutomationImg})` }}></div>
+                      <div className="service-card-overlay"></div>
+                      <div className="service-card-content">
+                        <div className="service-icon-box blue-glow">
+                          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2"><path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96-.44 2.5 2.5 0 0 1 0-3.12 3 3 0 0 1 0-4.88 2.5 2.5 0 0 1 0-3.12A2.5 2.5 0 0 1 9.5 2zM14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96-.44 2.5 2.5 0 0 0 0-3.12 3 3 0 0 0 0-4.88 2.5 2.5 0 0 0 0-3.12A2.5 2.5 0 0 0 14.5 2z"/></svg>
+                        </div>
+                        <h3>AI & Automation</h3>
+                        <p>Machine learning workflows, natural language processing, predictive modeling, and intelligent agents.</p>
+                      </div>
+                    </div>
+   
+                    {/* Card 5: Cybersecurity Services */}
+                    <div className="service-card service-card-purple">
+                      <div className="service-card-image-wrapper">
+                        <img src={cybersecurityImg} alt="Cybersecurity Services" className="service-card-img" />
+                      </div>
+                      <div className="service-card-hover-bg" style={{ backgroundImage: `url(${cybersecurityImg})` }}></div>
+                      <div className="service-card-overlay"></div>
+                      <div className="service-card-content">
+                        <div className="service-icon-box purple-glow">
+                          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                        </div>
+                        <h3>Cybersecurity</h3>
+                        <p>Threat detection, vulnerability assessments, compliance alignment, and zero-trust framework execution.</p>
+                      </div>
+                    </div>
+   
+                    {/* Card 6: IT Infrastructure Services */}
+                    <div className="service-card service-card-red">
+                      <div className="service-card-image-wrapper">
+                        <img src={itInfrastructureImg} alt="IT Infrastructure Services" className="service-card-img" />
+                      </div>
+                      <div className="service-card-hover-bg" style={{ backgroundImage: `url(${itInfrastructureImg})` }}></div>
+                      <div className="service-card-overlay"></div>
+                      <div className="service-card-content">
+                        <div className="service-icon-box red-glow">
+                          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"/><rect x="2" y="14" width="20" height="8" rx="2" ry="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>
+                        </div>
+                        <h3>IT Infrastructure</h3>
+                        <p>Network engineering, modern datacenter design, virtualization, and hybrid work setups.</p>
+                      </div>
+                    </div>
+   
+                    {/* Card 7: Managed IT Services */}
+                    <div className="service-card service-card-blue">
+                      <div className="service-card-image-wrapper">
+                        <img src={managedItImg} alt="Managed IT Services" className="service-card-img" />
+                      </div>
+                      <div className="service-card-hover-bg" style={{ backgroundImage: `url(${managedItImg})` }}></div>
+                      <div className="service-card-overlay"></div>
+                      <div className="service-card-content">
+                        <div className="service-icon-box blue-glow">
+                          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+                        </div>
+                        <h3>Managed IT Services</h3>
+                        <p>24/7 helpdesk monitoring, asset governance, backup systems, and routine infrastructure health updates.</p>
+                      </div>
+                    </div>
+   
+                    {/* Card 8: Support & Maintenance */}
+                    <div className="service-card service-card-purple">
+                      <div className="service-card-image-wrapper">
+                        <img src={supportMaintenanceImg} alt="Support & Maintenance" className="service-card-img" />
+                      </div>
+                      <div className="service-card-hover-bg" style={{ backgroundImage: `url(${supportMaintenanceImg})` }}></div>
+                      <div className="service-card-overlay"></div>
+                      <div className="service-card-content">
+                        <div className="service-icon-box purple-glow">
+                          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+                        </div>
+                        <h3>Support & Maintenance</h3>
+                        <p>SLA-backed systems troubleshooting, emergency hotfixes, package updates, and routine checks.</p>
+                      </div>
+                    </div>
+
                   </div>
- 
-                  {/* Card 2: Cloud Services */}
-                  <div className="service-card service-card-purple">
-                    <div className="service-card-image-wrapper purple-glow-border">
-                      <img src={cloudServicesImg} alt="Cloud Services" className="service-card-img" />
-                    </div>
-                    <div className="service-card-content">
-                      <div className="service-icon-box purple-glow">
-                        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg>
-                      </div>
-                      <h3>Cloud Services</h3>
-                      <p>Public, private, and hybrid cloud migration, serverless computing, architectures, and operations.</p>
-                    </div>
-                  </div>
- 
-                  {/* Card 3: DevOps & Automation */}
-                  <div className="service-card service-card-red">
-                    <div className="service-card-image-wrapper red-glow-border">
-                      <img src={devopsAutomationImg} alt="DevOps & Automation" className="service-card-img" />
-                    </div>
-                    <div className="service-card-content">
-                      <div className="service-icon-box red-glow">
-                        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 12c-2-2.67-4-4-6-4a4 4 0 1 0 0 8c2 0 4-1.33 6-4zm0 0c2 2.67 4 4 6 4a4 4 0 1 0 0-8c-2 0-4 1.33-6 4z"/></svg>
-                      </div>
-                      <h3>DevOps & Automation</h3>
-                      <p>CI/CD pipelines, Infrastructure as Code, Kubernetes orchestration, and continuous monitoring.</p>
-                    </div>
-                  </div>
- 
-                  {/* Card 4: AI & Intelligent Automation */}
-                  <div className="service-card service-card-blue">
-                    <div className="service-card-image-wrapper blue-glow-border">
-                      <img src={aiAutomationImg} alt="AI & Intelligent Automation" className="service-card-img" />
-                    </div>
-                    <div className="service-card-content">
-                      <div className="service-icon-box blue-glow">
-                        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2"><path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96-.44 2.5 2.5 0 0 1 0-3.12 3 3 0 0 1 0-4.88 2.5 2.5 0 0 1 0-3.12A2.5 2.5 0 0 1 9.5 2zM14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96-.44 2.5 2.5 0 0 0 0-3.12 3 3 0 0 0 0-4.88 2.5 2.5 0 0 0 0-3.12A2.5 2.5 0 0 0 14.5 2z"/></svg>
-                      </div>
-                      <h3>AI & Intelligent Automation</h3>
-                      <p>Machine learning workflows, natural language processing, predictive modeling, and intelligent agents.</p>
-                    </div>
-                  </div>
- 
-                  {/* Card 5: Cybersecurity Services */}
-                  <div className="service-card service-card-purple">
-                    <div className="service-card-image-wrapper purple-glow-border">
-                      <img src={cybersecurityImg} alt="Cybersecurity Services" className="service-card-img" />
-                    </div>
-                    <div className="service-card-content">
-                      <div className="service-icon-box purple-glow">
-                        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-                      </div>
-                      <h3>Cybersecurity Services</h3>
-                      <p>Threat detection, vulnerability assessments, compliance alignment, and zero-trust framework execution.</p>
-                    </div>
-                  </div>
- 
-                  {/* Card 6: IT Infrastructure Services */}
-                  <div className="service-card service-card-red">
-                    <div className="service-card-image-wrapper red-glow-border">
-                      <img src={itInfrastructureImg} alt="IT Infrastructure Services" className="service-card-img" />
-                    </div>
-                    <div className="service-card-content">
-                      <div className="service-icon-box red-glow">
-                        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"/><rect x="2" y="14" width="20" height="8" rx="2" ry="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>
-                      </div>
-                      <h3>IT Infrastructure Services</h3>
-                      <p>Network engineering, modern datacenter design, virtualization, and hybrid work setups.</p>
-                    </div>
-                  </div>
- 
-                  {/* Card 7: Managed IT Services */}
-                  <div className="service-card service-card-blue">
-                    <div className="service-card-image-wrapper blue-glow-border">
-                      <img src={managedItImg} alt="Managed IT Services" className="service-card-img" />
-                    </div>
-                    <div className="service-card-content">
-                      <div className="service-icon-box blue-glow">
-                        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
-                      </div>
-                      <h3>Managed IT Services</h3>
-                      <p>24/7 helpdesk monitoring, asset governance, backup systems, and routine infrastructure health updates.</p>
-                    </div>
-                  </div>
- 
-                  {/* Card 8: Support & Maintenance */}
-                  <div className="service-card service-card-purple">
-                    <div className="service-card-image-wrapper purple-glow-border">
-                      <img src={supportMaintenanceImg} alt="Support & Maintenance" className="service-card-img" />
-                    </div>
-                    <div className="service-card-content">
-                      <div className="service-icon-box purple-glow">
-                        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
-                      </div>
-                      <h3>Support & Maintenance</h3>
-                      <p>SLA-backed systems troubleshooting, emergency hotfixes, package updates, and routine checks.</p>
-                    </div>
+                  
+                  {/* Lighter Left/Right Nav Buttons placed down the cards */}
+                  <div className="services-carousel-controls">
+                    <button className="services-nav-btn prev" aria-label="Previous Services" onClick={() => handleServicesScroll('prev')}>&#8592;</button>
+                    <button className="services-nav-btn next" aria-label="Next Services" onClick={() => handleServicesScroll('next')}>&#8594;</button>
                   </div>
                 </div>
               </div>
@@ -880,8 +1155,8 @@ function App() {
                               <button 
                                 className="rennto-nav-btn prev" 
                                 onClick={(e) => {
-                                  e.preventDefault();
-                                  setRenntoActiveIndex((prev) => (prev === 0 ? renntoScreens.length - 1 : prev - 1));
+                                    e.preventDefault();
+                                    setRenntoActiveIndex((prev) => (prev === 0 ? renntoScreens.length - 1 : prev - 1));
                                 }}
                               >
                                 &#8592;
@@ -889,37 +1164,16 @@ function App() {
                               <button 
                                 className="rennto-nav-btn next" 
                                 onClick={(e) => {
-                                  e.preventDefault();
-                                  setRenntoActiveIndex((prev) => (prev === renntoScreens.length - 1 ? 0 : prev + 1));
+                                    e.preventDefault();
+                                    setRenntoActiveIndex((prev) => (prev === renntoScreens.length - 1 ? 0 : prev + 1));
                                 }}
                               >
                                 &#8594;
                               </button>
                             </div>
                           </div>
-                          <div className="rennto-thumbnails">
-                            {renntoScreens.map((screen, idx) => (
-                              <button
-                                key={idx}
-                                className={`rennto-thumb-btn ${renntoActiveIndex === idx ? 'active' : ''}`}
-                                onClick={(e) => {
-                                  e.preventDefault();
-                                  setRenntoActiveIndex(idx);
-                                }}
-                              >
-                                <img src={screen} alt={`Thumbnail ${idx + 1}`} />
-                              </button>
-                            ))}
-                          </div>
                         </div>
                         
-                        {/* Features Badge Grid */}
-                        <div className="product-features-tags">
-                          <span className="badge-blue">✓ Hostel & PG Bookings</span>
-                          <span className="badge-blue">✓ Room & Bed Allocations</span>
-                          <span className="badge-blue">✓ Tenant Verification</span>
-                          <span className="badge-blue">✓ Maintenance Tracking</span>
-                        </div>
 
                         <a href="#products" className="view-demo-link text-blue">View App &rarr;</a>
                       </div>
@@ -992,15 +1246,6 @@ function App() {
                           </div>
                         </div>
                         
-                        {/* Features Badge Grid */}
-                        <div className="product-features-tags">
-                          <span className="badge-red">✓ Internship Placements</span>
-                          <span className="badge-red">✓ Structured Training</span>
-                          <span className="badge-red">✓ Student-Mentor Match</span>
-                          <span className="badge-red">✓ Skill Assessments</span>
-                          <span className="badge-red">✓ Progress Tracking</span>
-                          <span className="badge-red">✓ Career Analytics</span>
-                        </div>
 
                         <a href="https://txhub.in/" target="_blank" rel="noopener noreferrer" className="view-demo-link text-red">Visit Website &rarr;</a>
                       </div>
@@ -1024,16 +1269,16 @@ function App() {
                   </defs>
 
                   {/* Invisible motionPath track for network particle */}
-                  <path id="networkPath" d="M 220 15 C 40 15, 40 375, 220 375 C 310 375, 345 245, 360 195 C 375 245, 410 375, 500 375 C 590 375, 625 245, 640 195 C 655 245, 690 375, 780 375 C 960 375, 960 15, 780 15 C 690 15, 655 145, 640 195 C 625 145, 590 15, 500 15 C 410 15, 375 145, 360 195 C 345 145, 310 15, 220 15 Z" fill="none" stroke="none" />
+                  <path id="networkPath" d="M 240 15 C 73 15, 73 375, 240 375 C 324 375, 356 245, 370 195 C 384 245, 416 375, 500 375 C 584 375, 616 245, 630 195 C 644 245, 676 375, 760 375 C 927 375, 927 15, 760 15 C 676 15, 644 145, 630 195 C 616 145, 584 15, 500 15 C 416 15, 384 145, 370 195 C 356 145, 324 15, 240 15 Z" fill="none" stroke="none" />
 
                   {/* Circles */}
-                  <circle cx="220" cy="195" r="180" className="orbit orbit-1" />
-                  <circle cx="500" cy="195" r="180" className="orbit orbit-2" />
-                  <circle cx="780" cy="195" r="180" className="orbit orbit-3" />
+                  <circle cx="240" cy="195" r="230" className="orbit orbit-1" />
+                  <circle cx="500" cy="195" r="230" className="orbit orbit-2" />
+                  <circle cx="760" cy="195" r="230" className="orbit orbit-3" />
 
                   {/* Subtle pulse nodes */}
-                  <circle cx="360" cy="195" r="5" className="pulse-node" />
-                  <circle cx="640" cy="195" r="5" className="pulse-node" />
+                  <circle cx="370" cy="195" r="5" className="pulse-node" />
+                  <circle cx="630" cy="195" r="5" className="pulse-node" />
 
                   {/* Network traveling particle */}
                   <circle id="network-particle" r="4" fill="#8b5cf6" />

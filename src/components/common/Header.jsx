@@ -391,7 +391,15 @@ export default function Header() {
             }}
             aria-label="Tanvox Technologies Home"
           >
-            <img src={logo} alt="Tanvox Technologies Logo" className="logo-image" />
+            {/* Crop the original logo.png to only display the custom mark */}
+            <div className="logo-mark">
+              <img src={logo} alt="Tanvox Mark" className="logo-mark-img" />
+            </div>
+            {/* The editable text branding */}
+            <div className="logo-text-group">
+              <span className="logo-text-main">Tanvox</span>
+              <span className="logo-text-sub">TECHNOLOGIES</span>
+            </div>
           </a>
         </div>
 
