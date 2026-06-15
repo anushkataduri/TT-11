@@ -19,6 +19,7 @@ import ourServicesImg from '../../assets/our_services.png';
 import itServicesImg from '../../assets/it_services.png';
 import nonItServicesImg from '../../assets/non_it_services.png';
 import whyChooseUsImg from '../../assets/why_choose_us.png';
+import serviceHero from '../../assets/serviceHero.png';
 
 import './Services.css';
 
@@ -722,15 +723,37 @@ export default function Services() {
         <div className="services-container">
           <div className="services-hero-grid">
             <div className="services-hero-left">
-              <span className="services-badge">Enterprise Capabilities</span>
-              <h1 className="services-hero-title">
+              <motion.span 
+                className="services-badge"
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+              >
+                Enterprise Capabilities
+              </motion.span>
+              <motion.h1 
+                className="services-hero-title"
+                initial={{ opacity: 0, y: -35 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.15 }}
+              >
                 Next-Gen <span>Enterprise Services</span> & Technology Engineering
-              </h1>
-              <p className="services-hero-desc">
+              </motion.h1>
+              <motion.p 
+                className="services-hero-desc"
+                initial={{ opacity: 0, y: 25 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.3 }}
+              >
                 We engineer scalable, secure, and modern digital architectures. From custom software development and 
                 cognitive AI integrations to comprehensive business process optimization, Tanvox drives your growth.
-              </p>
-              <div className="services-hero-actions">
+              </motion.p>
+              <motion.div 
+                className="services-hero-actions"
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.7, delay: 0.45 }}
+              >
                 <a href="#contact" className="services-btn-primary">
                   <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                     <line x1="22" y1="2" x2="11" y2="13" />
@@ -741,7 +764,7 @@ export default function Services() {
                 <a href="#it-services" className="services-btn-outline">
                   Explore Tech Stack &darr;
                 </a>
-              </div>
+              </motion.div>
 
               {/* Statistics Cards Row */}
               <div className="services-hero-stats-grid">
@@ -815,7 +838,9 @@ export default function Services() {
             </div>
             
             <div className="services-hero-right">
-              <Home />
+              <div className="services-hero-image-wrapper">
+                <img src={serviceHero} alt="Services Hero Transformation" className="services-hero-img" />
+              </div>
             </div>
           </div>
         </div>

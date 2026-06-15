@@ -38,17 +38,17 @@
    ========================================================================== */
 .services-hero {
   position: relative;
-  background: radial-gradient(circle at 80% 20%, rgba(37, 99, 235, 0.15) 0%, transparent 50%),
-              radial-gradient(circle at 20% 80%, rgba(236, 72, 153, 0.1) 0%, transparent 50%),
-              linear-gradient(135deg, var(--services-primary) 0%, var(--services-dark-bg) 100%);
-  height: 80vh;
-  min-height: 540px;
-  max-height: 700px;
+  background: #ffffff !important;
+  background-image: 
+    radial-gradient(circle at 80% 20%, rgba(37, 99, 235, 0.08) 0%, transparent 65%),
+    radial-gradient(circle at 20% 80%, rgba(236, 72, 153, 0.06) 0%, transparent 65%) !important;
+  height: auto !important;
+  min-height: 560px;
   padding-top: var(--header-height, 88px);
-  padding-bottom: 5px;
+  padding-bottom: 50px !important;
   display: flex;
   align-items: center;
-  color: var(--services-white);
+  color: var(--services-text-dark);
   overflow: hidden;
 }
 
@@ -63,8 +63,8 @@
 }
 
 .services-hero-stat-card {
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(15, 23, 42, 0.03);
+  border: 1px solid rgba(15, 23, 42, 0.06);
   border-radius: 10px;
   padding: 10px 4px;
   text-align: center;
@@ -79,9 +79,9 @@
 
 .services-hero-stat-card:hover {
   transform: translateY(-3px);
-  background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(255, 255, 255, 0.20);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);
+  background: rgba(15, 23, 42, 0.06);
+  border-color: rgba(15, 23, 42, 0.12);
+  box-shadow: 0 8px 16px rgba(15, 23, 42, 0.06);
 }
 
 .services-hero-stat-icon-wrapper {
@@ -102,18 +102,18 @@
 }
 
 .services-hero-stat-icon-wrapper.blue {
-  background-color: rgba(37, 99, 235, 0.15);
-  color: #60A5FA;
+  background-color: rgba(37, 99, 235, 0.12);
+  color: #2563EB;
 }
 
 .services-hero-stat-icon-wrapper.pink {
-  background-color: rgba(236, 72, 153, 0.15);
-  color: #F472B6;
+  background-color: rgba(236, 72, 153, 0.12);
+  color: #EC4899;
 }
 
 .services-hero-stat-icon-wrapper.navy {
-  background-color: rgba(255, 255, 255, 0.1);
-  color: #94A3B8;
+  background-color: rgba(15, 23, 42, 0.05);
+  color: #475569;
 }
 
 .services-hero-stat-card:hover .services-hero-stat-icon-wrapper.blue {
@@ -127,14 +127,14 @@
 }
 
 .services-hero-stat-card:hover .services-hero-stat-icon-wrapper.navy {
-  background-color: var(--services-white);
-  color: var(--services-primary);
+  background-color: var(--services-primary);
+  color: var(--services-white);
 }
 
 .services-hero-stat-number {
   font-size: 1.15rem;
   font-weight: 800;
-  color: var(--services-white);
+  color: var(--services-text-dark);
   line-height: 1.1;
   margin-bottom: 2px;
   text-align: center;
@@ -143,7 +143,7 @@
 .services-hero-stat-label {
   font-size: 0.62rem;
   font-weight: 600;
-  color: rgba(255, 255, 255, 0.65);
+  color: var(--services-text-gray) !important;
   line-height: 1.25;
   text-align: center;
 }
@@ -173,7 +173,7 @@
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.15em;
-  color: var(--services-accent);
+  color: var(--services-secondary) !important;
   margin-bottom: 8px;
   display: inline-flex;
   align-items: center;
@@ -185,7 +185,7 @@
   display: inline-block;
   width: 24px;
   height: 2px;
-  background-color: var(--services-accent);
+  background-color: var(--services-secondary) !important;
 }
 
 .services-hero-title {
@@ -195,10 +195,11 @@
   margin-bottom: 0.75rem;
   letter-spacing: -0.02em;
   max-width: 650px;
+  color: var(--services-text-dark);
 }
 
 .services-hero-title span {
-  background: linear-gradient(135deg, #3B82F6 0%, var(--services-accent) 100%);
+  background: linear-gradient(135deg, #2563EB 0%, #EC4899 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -207,7 +208,7 @@
 .services-hero-desc {
   font-size: 0.88rem;
   line-height: 1.55;
-  color: rgba(255, 255, 255, 0.8);
+  color: var(--services-text-gray) !important;
   margin-bottom: 1.25rem;
   max-width: 600px;
 }
@@ -239,9 +240,9 @@
 }
 
 .services-btn-outline {
-  border: 1.5px solid rgba(255, 255, 255, 0.25);
-  background-color: rgba(255, 255, 255, 0.05);
-  color: var(--services-white);
+  border: 1.5px solid rgba(15, 23, 42, 0.15);
+  background-color: transparent;
+  color: var(--services-text-dark) !important;
   padding: 12px 24px;
   border-radius: 50px;
   font-weight: 700;
@@ -249,15 +250,14 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  backdrop-filter: blur(10px);
   transition: transform 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .services-btn-outline:hover {
   transform: translateY(-2px);
-  background-color: rgba(255, 255, 255, 0.15);
-  border-color: rgba(255, 255, 255, 0.5);
-  color: var(--services-white);
+  background-color: rgba(15, 23, 42, 0.04);
+  border-color: var(--services-text-dark);
+  color: var(--services-text-dark) !important;
 }
 
 .services-hero-right {
@@ -266,11 +266,25 @@
   align-items: center;
   position: relative;
   width: 100%;
-  height: 320px;
 }
-.services-hero-right .hero-globe-wrapper {
-  transform: scale(0.62);
-  transform-origin: center;
+
+.services-hero-image-wrapper {
+  position: relative;
+  width: 140%;
+  max-width: 760px;
+  overflow: visible;
+  /* Blurred background integration */
+  filter: drop-shadow(0 25px 50px rgba(0, 0, 0, 0.35)) blur(0.4px);
+  -webkit-mask-image: radial-gradient(circle, rgba(0, 0, 0, 1) 75%, rgba(0, 0, 0, 0) 100%);
+  mask-image: radial-gradient(circle, rgba(0, 0, 0, 1) 75%, rgba(0, 0, 0, 0) 100%);
+}
+
+.services-hero-img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  display: block;
+  transform: scale(1.28); /* Further enlarged look */
 }
 
 

@@ -1,4 +1,5 @@
-import { motion } from "framer-motion";
+import { useState, useRef, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import "./Solutions.css";
 
 // Industry Images Imports
@@ -200,6 +201,255 @@ const iconMap = {
 };
 
 export default function Solutions() {
+  const scrollRef = useRef(null);
+  const [clickedIndex, setClickedIndex] = useState(null);
+  const [activeDetailIndex, setActiveDetailIndex] = useState(null); // No card expanded by default
+
+
+  const cardsData = [
+    { 
+      id: 0, 
+      title: "Healthcare", 
+      subtitle: "DEDICATED HEALTHCARE PLATFORMS",
+      img: healthcareImg,
+      details: "Transforming patient care delivery with secure, compliant digital architectures and advanced telemedicine capabilities.",
+      features: ["Hospital Management Systems", "Electronic Medical Records", "Telemedicine Platforms", "Patient Portals", "Appointment Scheduling", "Healthcare Analytics"],
+      benefits: ["Better Patient Experience", "Improved Clinical Outcomes", "Faster Access To Records", "Regulatory Compliance", "Operational Efficiency"],
+      themeColor: "#3b82f6",
+      themeColorSecondary: "#1d4ed8",
+      glowColor: "rgba(59, 130, 246, 0.04)",
+      ctaText: "Discuss Your Healthcare Project"
+    },
+    { 
+      id: 1, 
+      title: "Banking & FinTech", 
+      subtitle: "FINANCIAL SERVICES & SYSTEM SECURITY",
+      img: bankingFinancialImg,
+      details: "Engineering high-security transactional backends, mobile banking interfaces, fraud detection algorithms, and decentralized systems.",
+      features: ["Payment Gateways", "Mobile Banking Apps", "Fraud Detection Systems", "Robo-Advisors", "Blockchain Solutions", "Core Banking Integration"],
+      benefits: ["Secure Transactions", "High-Velocity Systems", "Regulatory Compliance (KYC/AML)", "Enhanced User Engagement", "Reduced Operational Risk"],
+      themeColor: "#00f2fe",
+      themeColorSecondary: "#4facfe",
+      glowColor: "rgba(79, 172, 254, 0.04)",
+      ctaText: "Discuss Your FinTech Project"
+    },
+    { 
+      id: 2, 
+      title: "Education", 
+      subtitle: "SCALABLE VIRTUAL LEARNING TOOLS",
+      img: educationImg,
+      details: "Building robust Learning Management Systems (LMS), interactive virtual classroom portals, and student data storage infrastructures.",
+      features: ["Learning Management (LMS)", "Virtual Classrooms", "Student Information Systems", "E-Learning Content Management", "Online Proctoring Tools", "Analytics & Reporting"],
+      benefits: ["Scalable Remote Learning", "Interactive Virtual Spaces", "Streamlined Administration", "Personalized Learning Paths", "Secure Examination Delivery"],
+      themeColor: "#f43f5e",
+      themeColorSecondary: "#be123c",
+      glowColor: "rgba(244, 63, 94, 0.04)",
+      ctaText: "Discuss Your Education Project"
+    },
+    { 
+      id: 3, 
+      title: "Retail & E-Commerce", 
+      subtitle: "OMNICHANNEL COMMERCE PLATFORMS",
+      img: retailEcommerceImg,
+      details: "Creating scalable storefront architectures, POS integrations, smart inventory management systems, and automated loyalty programs.",
+      features: ["Headless Commerce Storefronts", "Smart Commerce Dashboards", "POS System Integrations", "Inventory Optimization Engines", "Automated Loyalty Platforms", "Omnichannel Analytics"],
+      benefits: ["Seamless Storefront Speed", "Real-Time Stock Insights", "Enhanced Customer Loyalty", "Unified Omnichannel Journey", "Data-Driven Marketing Insights"],
+      themeColor: "#10b981",
+      themeColorSecondary: "#047857",
+      glowColor: "rgba(16, 185, 129, 0.04)",
+      ctaText: "Discuss Your Retail Project"
+    },
+    { 
+      id: 4, 
+      title: "Manufacturing", 
+      subtitle: "SMART PRODUCTION PLANNING & QA",
+      img: manufacturingImg,
+      details: "Integrating IoT monitoring, smart production planning dashboards, supply chain automation tools, and predictive maintenance logs.",
+      features: ["IoT Equipment Monitoring", "Production Planning Dashboards", "Supply Chain Automation", "Predictive Maintenance Logs", "Quality Assurance Analytics", "Warehouse Integration Tools"],
+      benefits: ["Minimized Equipment Downtime", "Optimized Production Flows", "End-to-End Asset Visibility", "Data-Backed QA Checks", "Reduced Inventory Wastage"],
+      themeColor: "#f59e0b",
+      themeColorSecondary: "#d97706",
+      glowColor: "rgba(245, 158, 11, 0.04)",
+      ctaText: "Discuss Your Manufacturing Project"
+    },
+    { 
+      id: 5, 
+      title: "Logistics & Cargo", 
+      subtitle: "AI-DRIVEN FLEET & ROUTE OPTIMIZATION",
+      img: logisticsTransportationImg,
+      details: "Deploying real-time cargo trackers, automated dispatching algorithms, route optimization scripts, and warehouse management systems.",
+      features: ["Real-Time Cargo Trackers", "Automated Fleet Dispatch", "AI Route Optimization", "Warehouse Management Systems", "Client Delivery Portals", "Customs Compliance Integrations"],
+      benefits: ["Optimal Route Delivery Times", "Reduced Fuel & Operations Cost", "Accurate Package Tracking", "Maximum Warehouse Throughput", "Simplified Customs Paperwork"],
+      themeColor: "#6366f1",
+      themeColorSecondary: "#4338ca",
+      glowColor: "rgba(99, 102, 241, 0.04)",
+      ctaText: "Discuss Your Logistics Project"
+    },
+    { 
+      id: 6, 
+      title: "Real Estate", 
+      subtitle: "VIRTUAL SHOWINGS & LEASE AUTOMATION",
+      img: realEstateImg,
+      details: "Engineering 3D virtual tour databases, listing management portals, CRM applications, and property management systems.",
+      features: ["3D Virtual Property Tours", "Listing Management Databases", "Agent CRM Applications", "Property Management Systems", "Lease & Contract Automation", "Market Analytics Engines"],
+      benefits: ["Engaging Remote Showings", "Centralized Lead Tracking", "Automated Billing & Maintenance", "Instant Contract Execution", "Accurate Valuation Estimates"],
+      themeColor: "#ec4899",
+      themeColorSecondary: "#be185d",
+      glowColor: "rgba(236, 72, 153, 0.04)",
+      ctaText: "Discuss Your Real Estate Project"
+    },
+    { 
+      id: 7, 
+      title: "Government", 
+      subtitle: "SECURE PUBLIC SERVICE DIGITALIZATION",
+      img: governmentPublicImg,
+      details: "Deploying secure municipal portal apps, digitized archives, public service interfaces, and high-availability administration backends.",
+      features: ["Secure Citizen Portals", "Digitized Document Archives", "Public Service Request Trackers", "Administrative Admin Panels", "Government-Grade Encryption", "High-Availability Databases"],
+      benefits: ["Accessible Public Services", "Secure Digital Records", "Efficient Request Processing", "High System Reliability", "Paperless Bureaucracy"],
+      themeColor: "#0f172a",
+      themeColorSecondary: "#334155",
+      glowColor: "rgba(15, 23, 42, 0.04)",
+      ctaText: "Discuss Your Public Sector Project"
+    },
+    { 
+      id: 8, 
+      title: "Telecom & 5G", 
+      subtitle: "NETWORK RELIABILITY & BILLING ENGINES",
+      img: telecommunicationsImg,
+      details: "Building network performance monitors, high-frequency signal mapping systems, billing engines, and carrier administration panels.",
+      features: ["Network Performance Monitors", "Signal Mapping Engines", "Automated Billing APIs", "Carrier Administration Panels", "Bandwidth Allocators", "IoT Device Gateways"],
+      benefits: ["Optimized Signal Reliability", "Zero-Failure Billing Runs", "Simplified Carrier Control", "Smart Bandwidth Utilization", "Scalable IoT Management"],
+      themeColor: "#06b6d4",
+      themeColorSecondary: "#0891b2",
+      glowColor: "rgba(6, 182, 212, 0.04)",
+      ctaText: "Discuss Your Telecom Project"
+    },
+    { 
+      id: 9, 
+      title: "Energy & Utilities", 
+      subtitle: "SMART GRID LOGS & LOAD MANAGEMENT",
+      img: energyUtilitiesImg,
+      details: "Engineering smart grid monitors, billing automation APIs, environment analytics dashboards, and consumption logs.",
+      features: ["Smart Grid Monitors", "Automated Customer Billing", "Environmental Impact Analytics", "Energy Consumption Logs", "Grid Load Balancers", "Utility Outage Trackers"],
+      benefits: ["Stable Grid Infrastructure", "Accurate Utility Invoicing", "Real-Time Outage Alerts", "Eco-Friendly Load Management", "Detailed Consumption Audits"],
+      themeColor: "#84cc16",
+      themeColorSecondary: "#65a30d",
+      glowColor: "rgba(132, 204, 22, 0.04)",
+      ctaText: "Discuss Your Utilities Project"
+    },
+    { 
+      id: 10, 
+      title: "Startups & SMEs", 
+      subtitle: "AGILE SaaS MVP & SOFTWARE DEVELOPMENT",
+      img: startupsSmeImg,
+      details: "Delivering agile software development prototypes, SaaS architectures, cloud scaling integrations, and cost-efficient operation systems.",
+      features: ["Agile Prototype Builders", "SaaS Core Architectures", "Cloud Scaling Integrations", "Cost-Efficient Infrastructure", "Product MVP Integrations", "Analytics Setup & Dashboards"],
+      benefits: ["Rapid Time-To-Market", "Scalable Software Foundation", "Low Operational Overhead", "Iterative MVP Enhancements", "Accurate Growth Analytics"],
+      themeColor: "#8b5cf6",
+      themeColorSecondary: "#6d28d9",
+      glowColor: "rgba(139, 92, 246, 0.04)",
+      ctaText: "Discuss Your Startup Project"
+    }
+  ];
+
+  const [isDragging, setIsDragging] = useState(false);
+  const [startX, setStartX] = useState(0);
+  const [scrollLeftState, setScrollLeftState] = useState(0);
+  const [dragMoved, setDragMoved] = useState(false);
+
+  const onMouseDown = (e) => {
+    const track = scrollRef.current;
+    if (!track) return;
+    setIsDragging(true);
+    setDragMoved(false);
+    setStartX(e.pageX - track.offsetLeft);
+    setScrollLeftState(track.scrollLeft);
+  };
+
+  const onMouseLeave = () => {
+    setIsDragging(false);
+  };
+
+  const onMouseUp = () => {
+    setIsDragging(false);
+  };
+
+  const onMouseMove = (e) => {
+    if (!isDragging) return;
+    e.preventDefault();
+    const track = scrollRef.current;
+    if (!track) return;
+    const x = e.pageX - track.offsetLeft;
+    const walk = (x - startX) * 1.5;
+    if (Math.abs(x - startX) > 6) {
+      setDragMoved(true);
+    }
+    track.scrollLeft = scrollLeftState - walk;
+  };
+
+  const handleCardClick = (cardId) => {
+    setActiveDetailIndex((prev) => {
+      const next = prev === cardId ? null : cardId;
+      if (next !== null) {
+        setTimeout(() => {
+          const track = scrollRef.current;
+          if (!track) return;
+          const cardElement = track.querySelector(`[data-card-id="${next}"]`);
+          if (cardElement) {
+            const trackWidth = track.clientWidth;
+            const cardOffset = cardElement.offsetLeft;
+            const cardWidth = cardElement.clientWidth;
+            const targetScroll = cardOffset - (trackWidth / 2) + (cardWidth / 2);
+            track.scrollTo({
+              left: targetScroll,
+              behavior: "smooth"
+            });
+          }
+        }, 150);
+      }
+      return next;
+    });
+  };
+
+  const onCardClick = (e, cardId) => {
+    if (dragMoved) {
+      e.preventDefault();
+      return;
+    }
+    handleCardClick(cardId);
+  };
+
+  useEffect(() => {
+    const container = scrollRef.current;
+    if (!container) return;
+    if (activeDetailIndex !== null) return; // Pause auto-scroll when a card is expanded
+
+    let autoScrollId;
+    const step = 0.4; // Elegant slower scroll
+    const intervalTime = 16;
+
+    const startAutoScroll = () => {
+      autoScrollId = setInterval(() => {
+        if (!container) return;
+        // Pause if user is hovering or dragging
+        if (container.matches(":hover") || isDragging) return;
+
+        container.scrollLeft += step;
+
+        const maxScroll = container.scrollWidth - container.clientWidth;
+        if (container.scrollLeft >= maxScroll - 1) {
+          container.scrollLeft = 0;
+        }
+      }, intervalTime);
+    };
+
+    startAutoScroll();
+
+    return () => {
+      if (autoScrollId) clearInterval(autoScrollId);
+    };
+  }, [activeDetailIndex, isDragging]);
+
   // Animation utility props
   const fadeUp = {
     hidden: { opacity: 0, y: 30 },
@@ -215,6 +465,34 @@ export default function Solutions() {
       }
     }
   };
+
+  const panelContainerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.05
+      }
+    },
+    exit: {
+      opacity: 0,
+      transition: { duration: 0.3 }
+    }
+  };
+
+  const panelItemVariants = {
+    hidden: { opacity: 0, y: 40 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6,
+        ease: [0.22, 1, 0.36, 1]
+      }
+    }
+  };
+
 
   return (
     <div className="solutions-page">
@@ -526,142 +804,146 @@ export default function Solutions() {
           
           <div className="solutions-section-header">
             <span className="solutions-section-subtitle">Dedicated Expertise</span>
-            <h2 className="solutions-section-title">Industry Solutions</h2>
+            <h2 className="solutions-section-title">Solutions We Provide</h2>
             <p className="solutions-section-desc">
               Customized strategies engineered to address unique compliance, scaling, and processing challenges.
             </p>
           </div>
 
           <motion.div 
+            ref={scrollRef}
             className="industry-solutions-grid"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
             variants={staggerContainer}
+            onMouseDown={onMouseDown}
+            onMouseLeave={onMouseLeave}
+            onMouseUp={onMouseUp}
+            onMouseMove={onMouseMove}
           >
-            {/* 1. Healthcare (Featured Card) */}
-            <motion.div className="industry-image-card featured-card" variants={fadeUp}>
-              <img src={healthcareImg} alt="Healthcare" className="industry-card-img" />
-              <div className="industry-overlay">
-                <h3>Healthcare</h3>
-                <p className="industry-feat-desc">Transforming patient care delivery with secure, compliant digital architectures.</p>
-                <ul className="industry-list">
-                  <li className="industry-list-item">Telemedicine Platforms</li>
-                  <li className="industry-list-item">EHR Integration</li>
-                  <li className="industry-list-item">Patient Portals</li>
-                  <li className="industry-list-item">Medical Billing</li>
-                  <li className="industry-list-item">Healthcare Analytics</li>
-                </ul>
-                <a href="#contact" className="sol-link-learn featured-cta">Learn More &rarr;</a>
-              </div>
-            </motion.div>
+            {cardsData.map((card) => {
+              const isSelected = activeDetailIndex === card.id;
+              return (
+                <motion.div 
+                  key={card.id}
+                  data-card-id={card.id}
+                  layout
+                  className={`industry-image-card ${isSelected ? 'expanded' : 'collapsed'}`} 
+                  onClick={(e) => onCardClick(e, card.id)}
+                  style={{
+                    borderColor: isSelected ? card.themeColor : 'transparent',
+                    boxShadow: isSelected 
+                      ? `0 20px 40px ${card.themeColor}22, 0 8px 16px ${card.themeColor}15` 
+                      : '0 6px 20px rgba(0, 0, 0, 0.08)',
+                  }}
+                  transition={{
+                    duration: 0.6,
+                    ease: [0.22, 1, 0.36, 1]
+                  }}
+                >
+                  {isSelected ? (
+                    <div className="expanded-card-inner">
+                      {/* Left Side: Image & Title */}
+                      <div className="expanded-card-left">
+                        <motion.img 
+                          layoutId={`card-img-${card.id}`}
+                          src={card.img} 
+                          alt={card.title} 
+                          className="expanded-card-img" 
+                        />
+                        <div className="expanded-card-img-overlay">
+                          <h3>{card.title}</h3>
+                        </div>
+                      </div>
 
-            {/* 2. Banking & Financial Services (Featured Card) */}
-            <motion.div className="industry-image-card featured-card" variants={fadeUp}>
-              <img src={bankingFinancialImg} alt="Banking & Financial Services" className="industry-card-img" />
-              <div className="industry-overlay">
-                <h3>Banking & FinTech</h3>
-                <p className="industry-feat-desc">Deploying high-velocity financial systems and secure payment infrastructures.</p>
-                <ul className="industry-list">
-                  <li className="industry-list-item">Payment Gateways</li>
-                  <li className="industry-list-item">Mobile Banking Apps</li>
-                  <li className="industry-list-item">Fraud Detection Systems</li>
-                  <li className="industry-list-item">Robo-Advisors</li>
-                  <li className="industry-list-item">Blockchain Solutions</li>
-                </ul>
-                <a href="#contact" className="sol-link-learn featured-cta">Learn More &rarr;</a>
-              </div>
-            </motion.div>
+                      {/* Right Side: Detailed Info */}
+                      <div className="expanded-card-right">
+                        <motion.div 
+                          variants={panelContainerVariants}
+                          initial="hidden"
+                          animate="visible"
+                          exit="exit"
+                          className="expanded-card-content"
+                        >
+                          {/* 1. Subtitle Badge */}
+                          <motion.div variants={panelItemVariants} className="expanded-badge-row">
+                            <span 
+                              className="expanded-card-badge"
+                              style={{ 
+                                color: card.themeColor, 
+                                borderColor: `${card.themeColor}33`, 
+                                background: `${card.themeColor}11` 
+                              }}
+                            >
+                              {card.subtitle}
+                            </span>
+                          </motion.div>
 
-            {/* 3. Education (Featured Card) */}
-            <motion.div className="industry-image-card featured-card" variants={fadeUp}>
-              <img src={educationImg} alt="Education" className="industry-card-img" />
-              <div className="industry-overlay">
-                <h3>Education</h3>
-                <p className="industry-feat-desc">Enabling scalable, interactive virtual learning environments globally.</p>
-                <ul className="industry-list">
-                  <li className="industry-list-item">Learning Systems (LMS)</li>
-                  <li className="industry-list-item">Virtual Classrooms</li>
-                  <li className="industry-list-item">Student Information</li>
-                  <li className="industry-list-item">E-Learning Content</li>
-                  <li className="industry-list-item">Proctoring Tools</li>
-                </ul>
-                <a href="#contact" className="sol-link-learn featured-cta">Learn More &rarr;</a>
-              </div>
-            </motion.div>
+                          {/* 2. Title */}
+                          <motion.h3 variants={panelItemVariants} className="expanded-card-title">
+                            {card.title} Solutions
+                          </motion.h3>
 
-            {/* 4. Retail & E-Commerce (Featured Card) */}
-            <motion.div className="industry-image-card featured-card" variants={fadeUp}>
-              <img src={retailEcommerceImg} alt="Retail & E-Commerce" className="industry-card-img" />
-              <div className="industry-overlay">
-                <h3>Retail & E-Commerce</h3>
-                <p className="industry-feat-desc">Optimizing retail operations with headless storefronts and smart commerce dashboards.</p>
-                <ul className="industry-list">
-                  <li className="industry-list-item">E-commerce Platforms</li>
-                  <li className="industry-list-item">POS Systems</li>
-                  <li className="industry-list-item">Inventory Optimization</li>
-                  <li className="industry-list-item">Loyalty Programs</li>
-                  <li className="industry-list-item">Retail Analytics</li>
-                </ul>
-                <a href="#contact" className="sol-link-learn featured-cta">Learn More &rarr;</a>
-              </div>
-            </motion.div>
+                          {/* 3. Description */}
+                          <motion.p variants={panelItemVariants} className="expanded-card-desc">
+                            {card.details}
+                          </motion.p>
 
-            {/* 5. Manufacturing (Standard Card) */}
-            <motion.div className="industry-image-card" variants={fadeUp}>
-              <img src={manufacturingImg} alt="Manufacturing" className="industry-card-img" />
-              <div className="industry-overlay">
-                <h3>Manufacturing</h3>
-              </div>
-            </motion.div>
+                          {/* 4. Capabilities */}
+                          <motion.h4 variants={panelItemVariants} className="expanded-card-section-title">
+                            Capabilities
+                          </motion.h4>
+                          <motion.div variants={panelItemVariants} className="expanded-card-features">
+                            {card.features.map((feature, fIdx) => (
+                              <span key={fIdx} className="expanded-feature-pill">
+                                {feature}
+                              </span>
+                            ))}
+                          </motion.div>
 
-            {/* 6. Logistics & Transportation (Standard Card) */}
-            <motion.div className="industry-image-card" variants={fadeUp}>
-              <img src={logisticsTransportationImg} alt="Logistics & Transportation" className="industry-card-img" />
-              <div className="industry-overlay">
-                <h3>Logistics & Cargo</h3>
-              </div>
-            </motion.div>
+                          {/* 5. Business Benefits */}
+                          <motion.h4 variants={panelItemVariants} className="expanded-card-section-title">
+                            Business Benefits
+                          </motion.h4>
+                          <motion.div variants={panelItemVariants} className="expanded-card-benefits">
+                            {card.benefits.map((benefit, bIdx) => (
+                              <div key={bIdx} className="expanded-benefit-item">
+                                <span className="benefit-check-icon" style={{ color: card.themeColor }}>✓</span>
+                                <span className="benefit-text">{benefit}</span>
+                              </div>
+                            ))}
+                          </motion.div>
 
-            {/* 7. Real Estate (Standard Card) */}
-            <motion.div className="industry-image-card" variants={fadeUp}>
-              <img src={realEstateImg} alt="Real Estate" className="industry-card-img" />
-              <div className="industry-overlay">
-                <h3>Real Estate</h3>
-              </div>
-            </motion.div>
-
-            {/* 8. Government & Public Sector (Standard Card) */}
-            <motion.div className="industry-image-card" variants={fadeUp}>
-              <img src={governmentPublicImg} alt="Government & Public Sector" className="industry-card-img" />
-              <div className="industry-overlay">
-                <h3>Government</h3>
-              </div>
-            </motion.div>
-
-            {/* 9. Telecommunications (Standard Card) */}
-            <motion.div className="industry-image-card" variants={fadeUp}>
-              <img src={telecommunicationsImg} alt="Telecommunications" className="industry-card-img" />
-              <div className="industry-overlay">
-                <h3>Telecom & 5G</h3>
-              </div>
-            </motion.div>
-
-            {/* 10. Energy & Utilities (Standard Card) */}
-            <motion.div className="industry-image-card" variants={fadeUp}>
-              <img src={energyUtilitiesImg} alt="Energy & Utilities" className="industry-card-img" />
-              <div className="industry-overlay">
-                <h3>Energy & Utilities</h3>
-              </div>
-            </motion.div>
-
-            {/* 11. Startups & SMEs (Standard Card) */}
-            <motion.div className="industry-image-card" variants={fadeUp}>
-              <img src={startupsSmeImg} alt="Startups & SMEs" className="industry-card-img" />
-              <div className="industry-overlay">
-                <h3>Startups & SMEs</h3>
-              </div>
-            </motion.div>
+                          {/* 6. CTA Button */}
+                          <motion.div variants={panelItemVariants} className="expanded-card-cta-wrapper">
+                            <a 
+                              href="#contact" 
+                              className="expanded-card-cta-btn"
+                              style={{ background: `linear-gradient(135deg, ${card.themeColor}, ${card.themeColorSecondary})` }}
+                            >
+                              {card.ctaText} &rarr;
+                            </a>
+                          </motion.div>
+                        </motion.div>
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="collapsed-card-inner">
+                      <motion.img 
+                        layoutId={`card-img-${card.id}`}
+                        src={card.img} 
+                        alt={card.title} 
+                        className="collapsed-card-img" 
+                      />
+                      <div className="collapsed-card-overlay">
+                        <h3>{card.title}</h3>
+                      </div>
+                    </div>
+                  )}
+                </motion.div>
+              );
+            })}
 
           </motion.div>
         </div>

@@ -1,9 +1,10 @@
 import { useState, useEffect, useRef } from 'react';
-import saasHeroIllustration from './assets/saas_hero_illustration.png';
+import saasHeroIllustration from './assets/heroGlobe.png';
 import Header from './components/common/Header';
 import Home from './pages/Home/Home';
 import Footer from './components/common/Footer';
 import Cursor from './components/common/Cursor';
+import { motion, AnimatePresence } from 'framer-motion';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { MotionPathPlugin } from 'gsap/MotionPathPlugin';
@@ -140,10 +141,12 @@ function App() {
   const animationFrameIdRef = useRef(null);
   const illustrationRef = useRef(null);
 
+  const isHomePage = ['#home', '', '#consultation', '#proposal', '#get-started', '#journey'].includes(currentHash) || !currentHash.startsWith('#');
+
   // JavaScript requestAnimationFrame loop for continuous services scroll
   useEffect(() => {
-    // Only run scroll animation on home page (#home) where the carousel resides
-    if (currentHash !== '#home') return;
+    // Only run scroll animation on home page where the carousel resides
+    if (!isHomePage) return;
 
     const track = document.querySelector('.services-carousel-track');
     if (!track) return;
@@ -208,7 +211,7 @@ function App() {
 
 
   useEffect(() => {
-    if (currentHash !== '#home') return;
+    if (!isHomePage) return;
 
     const el = illustrationRef.current;
     if (!el) return;
@@ -331,7 +334,7 @@ function App() {
   }, []);
 
   useEffect(() => {
-    if (currentHash !== '#home') return;
+    if (!isHomePage) return;
 
     // Track active GSAP tweens/scrolltriggers to clean them up properly
     const tweens = [];
@@ -341,54 +344,30 @@ function App() {
     const cards = gsap.utils.toArray('.orbit-card');
     if (cards.length >= 3) {
       tweens.push(
-        gsap.fromTo(cards[0], 
-          { x: -80, opacity: 0 },
-          { 
-            x: 0, 
-            opacity: 1, 
-            duration: 1.2, 
-            ease: 'power3.out',
-            scrollTrigger: {
-              trigger: '.orbital-section',
-              start: 'top 85%',
-              toggleActions: 'play reverse play reverse'
-            }
-          }
-        )
+        gsap.from(cards[0], { 
+          x: -80, 
+          opacity: 0, 
+          duration: 1.2, 
+          ease: 'power3.out'
+        })
       );
 
       tweens.push(
-        gsap.fromTo(cards[1], 
-          { y: 80, opacity: 0 },
-          { 
-            y: 0, 
-            opacity: 1, 
-            duration: 1.2, 
-            ease: 'power3.out',
-            scrollTrigger: {
-              trigger: '.orbital-section',
-              start: 'top 85%',
-              toggleActions: 'play reverse play reverse'
-            }
-          }
-        )
+        gsap.from(cards[1], { 
+          y: 80, 
+          opacity: 0, 
+          duration: 1.2, 
+          ease: 'power3.out'
+        })
       );
 
       tweens.push(
-        gsap.fromTo(cards[2], 
-          { x: 80, opacity: 0 },
-          { 
-            x: 0, 
-            opacity: 1, 
-            duration: 1.2, 
-            ease: 'power3.out',
-            scrollTrigger: {
-              trigger: '.orbital-section',
-              start: 'top 85%',
-              toggleActions: 'play reverse play reverse'
-            }
-          }
-        )
+        gsap.from(cards[2], { 
+          x: 80, 
+          opacity: 0, 
+          duration: 1.2, 
+          ease: 'power3.out'
+        })
       );
 
       // Setup network-particle initial position and motionPath loop
@@ -551,6 +530,9 @@ function App() {
   }, [currentHash]);
 
   const renderContent = () => {
+    if (currentHash && currentHash.startsWith('#case-study/')) {
+      return <Portfolio currentHash={currentHash} />;
+    }
     switch (currentHash) {
       case '#about':
         return <About />;
@@ -561,7 +543,13 @@ function App() {
       case '#industries':
         return <Industries />;
       case '#portfolio':
-        return <Portfolio />;
+      case '#portfolio-projects':
+      case '#portfolio-cases':
+      case '#portfolio-tech':
+      case '#portfolio-testimonials':
+      case '#portfolio/projects/rennto':
+      case '#portfolio/projects/txhub':
+        return <Portfolio currentHash={currentHash} />;
       case '#collaboration':
       case '#collab-tech':
       case '#collab-business':
@@ -636,26 +624,44 @@ function App() {
                       Get Started
                     </a>
                   </div>
+
+                  {/* Integrated Trust & Partners Row */}
+                  <div className="hero-trust-row">
+                    <div className="hero-trust-item">
+                      <span className="hero-trust-label">Trusted by:</span>
+                      <div className="hero-trust-logos">
+                        <a href="https://100transcripts.com/#" target="_blank" rel="noopener noreferrer" className="hero-trust-logo-card" title="100 Transcripts">
+                          <img src={transcriptsLogo} alt="100 Transcripts Logo" className="hero-trust-logo-img transcripts-logo" />
+                        </a>
+                        <a href="https://play.google.com/store/apps/details?id=com.chatawayplus.app&hl=en_IN" target="_blank" rel="noopener noreferrer" className="hero-trust-logo-card" title="chatAway">
+                          <img src={chatawayLogo} alt="Chataway Logo" className="hero-trust-logo-img chataway-logo" style={{ height: '16px', objectFit: 'contain' }} />
+                          <span className="hero-trust-logo-text">chatAway</span>
+                        </a>
+                      </div>
+                    </div>
+                    <div className="hero-trust-item partner-item">
+                      <span className="hero-trust-label">Partner:</span>
+                      <div className="hero-trust-logos">
+                        <div className="hero-trust-logo-card" title="NextGen Technologies">
+                          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2.5" style={{ color: '#F87171', marginRight: '4px' }}>
+                            <polyline points="13 17 18 12 13 7"/>
+                            <polyline points="6 17 11 12 6 7"/>
+                          </svg>
+                          <span className="hero-trust-logo-text-nextgen">NextGen Technologies</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
 
                 {/* Right Column: Premium SaaS Illustration Image */}
-                <div className="hero-right-col">
+                <div className="hero-right-col" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                   {/* Large Ambient Glow behind wrapper */}
                   <div className="hero-ambient-glow"></div>
                   
                   <div className="hero-illustration-wrapper" ref={illustrationRef}>
                     <img src={saasHeroIllustration} alt="Tanvox SaaS Technology Solution Dashboard" className="hero-illustration-img" />
                     
-                    {/* Layered Anti-Gravity Platform */}
-                    <div className="anti-gravity-platform">
-                      <div className="platform-ring platform-ring-outer"></div>
-                      <div className="platform-ring platform-ring-middle"></div>
-                      <div className="platform-ring platform-ring-inner"></div>
-                      <div className="platform-glow"></div>
-                    </div>
-
-
-
                     {/* Subtle Glowing Particles (Capped for performance) */}
                     <div className="hero-particle hp-1"></div>
                     <div className="hero-particle hp-2"></div>
@@ -664,167 +670,39 @@ function App() {
                     <div className="hero-particle hp-5"></div>
                     <div className="hero-particle hp-6"></div>
                   </div>
+
+                  {/* Smaller scrolling certifications marquee under image */}
+                  <div className="hero-cert-marquee-section">
+                    <span className="hero-cert-label">Certifications & Compliance:</span>
+                    <div className="hero-cert-marquee-container">
+                      <div className="hero-cert-marquee-track">
+                        <div className="hero-cert-pill"><Iso9001Icon /><span className="hero-cert-text">ISO 9001</span></div>
+                        <div className="hero-cert-pill"><Iso27001Icon /><span className="hero-cert-text">ISO 27001</span></div>
+                        <div className="hero-cert-pill"><Soc2Icon /><span className="hero-cert-text">SOC 2 II</span></div>
+                        <div className="hero-cert-pill"><Iso20000Icon /><span className="hero-cert-text">ISO 20000</span></div>
+                        <div className="hero-cert-pill"><Iso22301Icon /><span className="hero-cert-text">ISO 22301</span></div>
+                        <div className="hero-cert-pill"><PciIcon /><span className="hero-cert-text">PCI DSS</span></div>
+                        <div className="hero-cert-pill"><GdprIcon /><span className="hero-cert-text">GDPR</span></div>
+                        <div className="hero-cert-pill"><Iso27701Icon /><span className="hero-cert-text">ISO 27701</span></div>
+                        <div className="hero-cert-pill"><Iso42001Icon /><span className="hero-cert-text">ISO 42001</span></div>
+                        
+                        {/* Duplicate for seamless infinite loop */}
+                        <div className="hero-cert-pill"><Iso9001Icon /><span className="hero-cert-text">ISO 9001</span></div>
+                        <div className="hero-cert-pill"><Iso27001Icon /><span className="hero-cert-text">ISO 27001</span></div>
+                        <div className="hero-cert-pill"><Soc2Icon /><span className="hero-cert-text">SOC 2 II</span></div>
+                        <div className="hero-cert-pill"><Iso20000Icon /><span className="hero-cert-text">ISO 20000</span></div>
+                        <div className="hero-cert-pill"><Iso22301Icon /><span className="hero-cert-text">ISO 22301</span></div>
+                        <div className="hero-cert-pill"><PciIcon /><span className="hero-cert-text">PCI DSS</span></div>
+                        <div className="hero-cert-pill"><GdprIcon /><span className="hero-cert-text">GDPR</span></div>
+                        <div className="hero-cert-pill"><Iso27701Icon /><span className="hero-cert-text">ISO 27701</span></div>
+                        <div className="hero-cert-pill"><Iso42001Icon /><span className="hero-cert-text">ISO 42001</span></div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </main>
-
-            {/* Unified Trust, Certifications & Partners Section */}
-            <section className="unified-trust-section">
-              <div className="section-container">
-                <div className="unified-trust-card">
-                  {/* Header */}
-                  <div className="trust-header">
-                    <span className="trust-badge">Trust & Compliance</span>
-                    <h2 className="trust-title">Certified Excellence. <span>Trusted Worldwide.</span></h2>
-                    <p className="trust-desc">
-                      Our certifications, global clients, and technology partnerships reflect our commitment to security, 
-                      quality, and delivering enterprise-grade solutions.
-                    </p>
-                  </div>
-
-                  {/* Certifications Subsection */}
-                  <div className="trust-subsection-title">
-                    <svg className="compliance-header-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2.5">
-                      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                      <path d="m9 12 2 2 4-4"/>
-                    </svg>
-                    <span>Certifications & Compliance</span>
-                  </div>
-
-                  <div className="certifications-marquee-container">
-                    <div className="certifications-marquee-track">
-                      {/* Original Set */}
-                      <div className="cert-marquee-pill">
-                        <Iso9001Icon />
-                        <span className="cert-pill-text">ISO 9001:2015</span>
-                      </div>
-                      <div className="cert-marquee-pill">
-                        <Iso27001Icon />
-                        <span className="cert-pill-text">ISO 27001</span>
-                      </div>
-                      <div className="cert-marquee-pill">
-                        <Soc2Icon />
-                        <span className="cert-pill-text">SOC 2 Type II</span>
-                      </div>
-                      <div className="cert-marquee-pill">
-                        <Iso20000Icon />
-                        <span className="cert-pill-text">ISO 20000-1</span>
-                      </div>
-                      <div className="cert-marquee-pill">
-                        <Iso22301Icon />
-                        <span className="cert-pill-text">ISO 22301</span>
-                      </div>
-                      <div className="cert-marquee-pill">
-                        <PciIcon />
-                        <span className="cert-pill-text">PCI DSS</span>
-                      </div>
-                      <div className="cert-marquee-pill">
-                        <GdprIcon />
-                        <span className="cert-pill-text">GDPR Compliance</span>
-                      </div>
-                      <div className="cert-marquee-pill">
-                        <Iso27701Icon />
-                        <span className="cert-pill-text">ISO 27701</span>
-                      </div>
-                      <div className="cert-marquee-pill">
-                        <Iso42001Icon />
-                        <span className="cert-pill-text">ISO 42001</span>
-                      </div>
-
-                      {/* Duplicate Set for Loop */}
-                      <div className="cert-marquee-pill">
-                        <Iso9001Icon />
-                        <span className="cert-pill-text">ISO 9001:2015</span>
-                      </div>
-                      <div className="cert-marquee-pill">
-                        <Iso27001Icon />
-                        <span className="cert-pill-text">ISO 27001</span>
-                      </div>
-                      <div className="cert-marquee-pill">
-                        <Soc2Icon />
-                        <span className="cert-pill-text">SOC 2 Type II</span>
-                      </div>
-                      <div className="cert-marquee-pill">
-                        <Iso20000Icon />
-                        <span className="cert-pill-text">ISO 20000-1</span>
-                      </div>
-                      <div className="cert-marquee-pill">
-                        <Iso22301Icon />
-                        <span className="cert-pill-text">ISO 22301</span>
-                      </div>
-                      <div className="cert-marquee-pill">
-                        <PciIcon />
-                        <span className="cert-pill-text">PCI DSS</span>
-                      </div>
-                      <div className="cert-marquee-pill">
-                        <GdprIcon />
-                        <span className="cert-pill-text">GDPR Compliance</span>
-                      </div>
-                      <div className="cert-marquee-pill">
-                        <Iso27701Icon />
-                        <span className="cert-pill-text">ISO 27701</span>
-                      </div>
-                      <div className="cert-marquee-pill">
-                        <Iso42001Icon />
-                        <span className="cert-pill-text">ISO 42001</span>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Split Row: Trusted Clients and Technology Partners */}
-                  <div className="trust-split-row">
-                    {/* Left block: Trusted Clients */}
-                    <div className="trust-clients-block">
-                      <div className="trust-subsection-title">
-                        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2.5">
-                          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-                          <circle cx="9" cy="7" r="4"/>
-                          <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
-                          <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-                        </svg>
-                        <span>Trusted by Global Clients</span>
-                      </div>
-
-                      <div className="clients-carousel-row">
-                        {/* 100 Transcripts */}
-                        <a href="https://100transcripts.com/#" target="_blank" rel="noopener noreferrer" className="client-logo-card card-l-1" title="100 Transcripts">
-                          <img src={transcriptsLogo} alt="100 Transcripts Logo" className="client-logo-img transcripts-logo" />
-                        </a>
-
-                        {/* Chataway */}
-                        <a href="https://play.google.com/store/apps/details?id=com.chatawayplus.app&hl=en_IN" target="_blank" rel="noopener noreferrer" className="client-logo-card card-l-2" title="Chataway">
-                          <img src={chatawayLogo} alt="Chataway Logo" className="client-logo-img chataway-logo" />
-                          <span className="client-logo-text">chatAway</span>
-                        </a>
-                      </div>
-                    </div>
-
-                    {/* Right block: Technology Partners */}
-                    <div className="trust-partners-block">
-                      <div className="trust-subsection-title">
-                        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2.5">
-                          <polyline points="16 18 22 12 16 6" />
-                          <polyline points="8 6 2 12 8 18" />
-                        </svg>
-                        <span>Technology Partners</span>
-                      </div>
-
-                      <div className="partners-carousel-row">
-                        {/* NextGen Technologies */}
-                        <div className="client-logo-card card-l-6" title="NextGen Technologies">
-                          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2.5" style={{ color: '#F87171' }}>
-                            <polyline points="13 17 18 12 13 7"/>
-                            <polyline points="6 17 11 12 6 7"/>
-                          </svg>
-                          <span className="text-nextgen">NextGen Technologies</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </section>
-
+ 
             {/* Our Key Services Section */}
             <section className="services-section">
               <div className="section-container">
@@ -1256,96 +1134,109 @@ function App() {
               </div>
             </section>
 
-            {/* Connected Overlapping Circles Showcase */}
-            <section className="orbital-section">
-              <div className="orbital-wrapper">
-                <svg className="orbital-network" viewBox="0 0 1000 400" preserveAspectRatio="xMidYMid meet">
-                  <defs>
-                    <linearGradient id="gradientStroke" x1="0%" y1="0%" x2="100%" y2="0%">
-                      <stop offset="0%" stopColor="#3B82F6" />
-                      <stop offset="50%" stopColor="#8B5CF6" />
-                      <stop offset="100%" stopColor="#EC4899" />
-                    </linearGradient>
-                  </defs>
-
-                  {/* Invisible motionPath track for network particle */}
-                  <path id="networkPath" d="M 240 15 C 73 15, 73 375, 240 375 C 324 375, 356 245, 370 195 C 384 245, 416 375, 500 375 C 584 375, 616 245, 630 195 C 644 245, 676 375, 760 375 C 927 375, 927 15, 760 15 C 676 15, 644 145, 630 195 C 616 145, 584 15, 500 15 C 416 15, 384 145, 370 195 C 356 145, 324 15, 240 15 Z" fill="none" stroke="none" />
-
-                  {/* Circles */}
-                  <circle cx="240" cy="195" r="230" className="orbit orbit-1" />
-                  <circle cx="500" cy="195" r="230" className="orbit orbit-2" />
-                  <circle cx="760" cy="195" r="230" className="orbit orbit-3" />
-
-                  {/* Subtle pulse nodes */}
-                  <circle cx="370" cy="195" r="5" className="pulse-node" />
-                  <circle cx="630" cy="195" r="5" className="pulse-node" />
-
-                  {/* Network traveling particle */}
-                  <circle id="network-particle" r="4" fill="#8b5cf6" />
-                </svg>
-
+            {/* Directory Solutions & Technology Expertise Showcase */}
+            <section className="directory-showcase-section">
+              <div className="directory-container" style={{ gridTemplateColumns: 'repeat(3, 1fr)' }}>
+                
                 {/* Column 1: Solutions We Provide */}
-                <div className="orbit-card solutions grad-blue">
-                  <div className="directory-icon-circle bg-blue-grad">
-                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2.5">
-                      <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
-                      <line x1="9" y1="3" x2="9" y2="21"/>
-                    </svg>
+                <motion.div 
+                  className="directory-column-card card-blue-theme"
+                  initial={{ opacity: 0, y: 40 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-50px" }}
+                  transition={{ duration: 0.8, ease: "easeOut" }}
+                  whileHover={{ y: -8, boxShadow: '0 20px 40px rgba(37, 99, 235, 0.12)' }}
+                >
+                  <div className="directory-card-glow-bg"></div>
+                  <div className="directory-card-header">
+                    <div className="directory-card-icon-box blue-grad">
+                      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2.5">
+                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                        <line x1="9" y1="3" x2="9" y2="21"/>
+                      </svg>
+                    </div>
+                    <h3>Solutions We Provide</h3>
                   </div>
-                  <h3>Solutions We Provide</h3>
-                  <ul className="directory-list-modern">
-                    <li>Digital Transformation Solutions</li>
-                    <li>Enterprise Business Solutions</li>
-                    <li>Cloud & Infrastructure Solutions</li>
-                    <li>DevOps & Platform Solutions</li>
-                    <li>AI & Data Solutions</li>
+                  <ul className="directory-list">
+                    <li><span className="bullet-arrow">&#9656;</span> Digital Transformation</li>
+                    <li><span className="bullet-arrow">&#9656;</span> Enterprise Business Solutions</li>
+                    <li><span className="bullet-arrow">&#9656;</span> Cloud & Infrastructure</li>
+                    <li><span className="bullet-arrow">&#9656;</span> DevOps & Platform Solutions</li>
+                    <li><span className="bullet-arrow">&#9656;</span> AI & Data Solutions</li>
+                    <li><span className="bullet-arrow">&#9656;</span> Cybersecurity Solutions</li>
+                    <li><span className="bullet-arrow">&#9656;</span> Startup & SME Solutions</li>
                   </ul>
-                  <a href="#solutions" className="view-all-link-modern border-bottom-blue">
-                    View All Solutions <span className="link-arrow">&rarr;</span>
+                  <a href="#solutions" className="view-all-link-gradient btn-blue-arrow">
+                    View All Solutions &rarr;
                   </a>
-                </div>
+                </motion.div>
 
                 {/* Column 2: Industries Served */}
-                <div className="orbit-card industries grad-red">
-                  <div className="directory-icon-circle bg-red-grad">
-                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2.5">
-                      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                    </svg>
+                <motion.div 
+                  className="directory-column-card card-red-theme"
+                  initial={{ opacity: 0, y: 40 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-50px" }}
+                  transition={{ duration: 0.8, delay: 0.15, ease: "easeOut" }}
+                  whileHover={{ y: -8, boxShadow: '0 20px 40px rgba(239, 68, 68, 0.12)' }}
+                >
+                  <div className="directory-card-glow-bg"></div>
+                  <div className="directory-card-header">
+                    <div className="directory-card-icon-box red-grad">
+                      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2.5">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                      </svg>
+                    </div>
+                    <h3>Industries Served</h3>
                   </div>
-                  <h3>Industries Served</h3>
-                  <ul className="directory-list-modern">
-                    <li>Banking, BFSI & Insurance</li>
-                    <li>Healthcare & Life Sciences</li>
-                    <li>Retail & E-Commerce</li>
-                    <li>Logistics & Supply Chain</li>
-                    <li>Manufacturing & Industry 4.0</li>
+                  <ul className="directory-list">
+                    <li><span className="bullet-arrow">&#9656;</span> Banking, BFSI & Insurance</li>
+                    <li><span className="bullet-arrow">&#9656;</span> Healthcare & Life Sciences</li>
+                    <li><span className="bullet-arrow">&#9656;</span> Retail & E-Commerce</li>
+                    <li><span className="bullet-arrow">&#9656;</span> Manufacturing & Industry 4.0</li>
+                    <li><span className="bullet-arrow">&#9656;</span> Logistics & Supply Chain</li>
+                    <li><span className="bullet-arrow">&#9656;</span> Education & EdTech</li>
+                    <li><span className="bullet-arrow">&#9656;</span> Startups & Small Business</li>
                   </ul>
-                  <a href="#industries" className="view-all-link-modern border-bottom-red">
-                    View All Industries <span className="link-arrow">&rarr;</span>
+                  <a href="#industries" className="view-all-link-gradient btn-red-arrow">
+                    View All Industries &rarr;
                   </a>
-                </div>
+                </motion.div>
 
                 {/* Column 3: Technology Expertise */}
-                <div className="orbit-card technology grad-purple">
-                  <div className="directory-icon-circle bg-purple-grad">
-                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2.5">
-                      <polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/>
-                    </svg>
+                <motion.div 
+                  className="directory-column-card card-purple-theme"
+                  initial={{ opacity: 0, y: 40 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-50px" }}
+                  transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
+                  whileHover={{ y: -8, boxShadow: '0 20px 40px rgba(168, 85, 247, 0.12)' }}
+                >
+                  <div className="directory-card-glow-bg"></div>
+                  <div className="directory-card-header">
+                    <div className="directory-card-icon-box purple-grad">
+                      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2.5">
+                        <polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/>
+                      </svg>
+                    </div>
+                    <h3>Technology Expertise</h3>
                   </div>
-                  <h3>Technology Expertise</h3>
-                  <ul className="directory-list-modern">
-                    <li>Cloud Platforms</li>
-                    <li>Mobile Development</li>
-                    <li>Web Application</li>
-                    <li>DevOps & Automation</li>
-                    <li>Data Engineering & Analytics</li>
+                  <ul className="directory-list">
+                    <li><span className="bullet-arrow">&#9656;</span> Cloud Platforms</li>
+                    <li><span className="bullet-arrow">&#9656;</span> Mobile Development</li>
+                    <li><span className="bullet-arrow">&#9656;</span> Web Application</li>
+                    <li><span className="bullet-arrow">&#9656;</span> Databases</li>
+                    <li><span className="bullet-arrow">&#9656;</span> DevOps & Automation</li>
+                    <li><span className="bullet-arrow">&#9656;</span> Security</li>
+                    <li><span className="bullet-arrow">&#9656;</span> Data Engineering & Analytics</li>
                   </ul>
-                  <a href="#technology" className="view-all-link-modern border-bottom-purple">
-                    View All Technologies <span className="link-arrow">&rarr;</span>
+                  <a href="#technology" className="view-all-link-gradient btn-purple-arrow">
+                    View All Technologies &rarr;
                   </a>
-                </div>
+                </motion.div>
               </div>
             </section>
+
 
             {/* Ready to Accelerate Banner & Why Partner With Us Section */}
             <section className="accelerate-banner-section">
